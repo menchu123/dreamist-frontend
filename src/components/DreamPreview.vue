@@ -5,11 +5,9 @@
       <font-awesome-icon icon="moon"></font-awesome-icon>
     </div>
     <div class="dream-prev__prev">
-      <h2 class="dream-prev__title">Title of dream</h2>
-      <p class="dream-prev__text">
-        Cat slap dog in face. Present belly, stare at imaginary bug. Meow for food, then chas...
-      </p>
-      <section class="dream-prev__type">LUCID</section>
+      <h2 class="dream-prev__title">{{ title }}</h2>
+      <p class="dream-prev__text">{{ description }}...</p>
+      <section class="dream-prev__type">{{ type }}</section>
     </div>
   </section>
 </template>
@@ -19,6 +17,14 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "DreamPreview",
+  props: {
+    title: String,
+    description: String,
+    date: String,
+    type: String,
+    _id: String,
+  },
+  methods: {},
 });
 </script>
 
@@ -39,6 +45,9 @@ export default defineComponent({
   border-radius: 15px;
   &__prev {
     width: 235px;
+  }
+  &__text {
+    min-height: 60px;
   }
   &__date {
     font-size: 20px;

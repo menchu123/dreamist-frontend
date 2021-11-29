@@ -2,22 +2,27 @@
   <div class="home">
     <h1 class="title">Journal</h1>
 
-    <div class="dream-list">
-      <DreamPreview />
-      <DreamPreview />
-      <DreamPreview />
-      <DreamPreview />
-      <DreamPreview />
-      <DreamPreview />
-      <DreamPreview />
-      <DreamPreview />
-    </div>
+    <ul class="dream-list">
+      <li
+        class="dream-list__dream"
+        v-for="dream in dreams"
+        :key="dream.id"
+      >
+        <DreamPreview
+          :title="dream.title"
+          :description="dream.description"
+          :date="dream.date"
+          :type="dream.type.toUpperCase()"
+        />
+      </li>
+    </ul>
     <NavBar />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { mapState, mapActions } from "vuex";
 import NavBar from "@/components/NavBar.vue";
 import DreamPreview from "@/components/DreamPreview.vue";
 
@@ -26,6 +31,15 @@ export default defineComponent({
   components: {
     NavBar,
     DreamPreview,
+  },
+  computed: {
+    ...mapState(["dreams"]),
+  },
+  methods: {
+    ...mapActions(["getDreamsFromApi"]),
+  },
+  mounted() {
+    this.getDreamsFromApi();
   },
 });
 </script>
@@ -49,6 +63,8 @@ export default defineComponent({
     &::-webkit-scrollbar {
       display: none;
     }
+    list-style: none;
+    padding-left: 0;
   }
 }
 </style>
