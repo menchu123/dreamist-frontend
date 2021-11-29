@@ -12,12 +12,14 @@ export default createStore({
   },
   actions: {
     async getDreamsFromApi({ commit }): Promise<void> {
-      const { data } = await axios.get(`${process.env.VUE_APP_API_URL}/dreams/user-dreams`, {
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWNmNTNiYzNjMzA3Zjg1Y2ViZGMzYiIsIm5hbWUiOiJFbHNhIiwiaWF0IjoxNjM4MjExNjE1LCJleHAiOjE2Mzg0NzA4MTV9.1NxiF6uHVQBN_w5yrw9FMa9fGgOSgHfBpkxDcgR0CjA",
-        },
-      });
+      const { data } = await axios.get(
+        `${process.env.VUE_APP_API_URL}/dreams/user-dreams`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.VUE_APP_TOKEN}`,
+          },
+        }
+      );
       commit("loadDreams", data);
     },
   },
