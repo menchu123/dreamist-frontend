@@ -28,10 +28,12 @@ export default defineComponent({
 .dream-prev {
   background-color: $blue2;
   margin-bottom: 20px;
+  margin: 0 auto 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: $content-width;
   min-height: 126px;
   border-radius: 15px;
   &__prev {

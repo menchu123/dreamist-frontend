@@ -27,6 +27,10 @@ export default defineComponent({
 .home {
   @include backgroundDark;
   padding: 132px 20px 0;
+  .title {
+    max-width: $content-width;
+    margin: 0 auto 10px;
+  }
   .dream-list {
     height: calc(100vh - 110px - 150px);
     overflow-y: scroll;
