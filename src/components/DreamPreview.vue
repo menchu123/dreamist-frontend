@@ -22,4 +22,38 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import "./src/styles/variables";
+
+.dream-prev {
+  background-color: $blue2;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 126px;
+  border-radius: 15px;
+  &__prev {
+    width: 235px;
+  }
+  &__date {
+    font-size: 20px;
+    line-height: 135%;
+    text-align: right;
+    width: 52px;
+  }
+  &__type {
+    margin: 0 0 15px;
+    width: min-content;
+    padding: 5px 10px;
+    font-size: 14px;
+    line-height: 15px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    border: 1px solid $lightgrey;
+    border-radius: 6px;
+    background-color: #00b5b8;
+  }
+}
+</style>
