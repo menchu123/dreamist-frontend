@@ -1,5 +1,8 @@
 <template>
-  <div class="home"></div>
+  <div class="home">
+    <h1 class="title">Journal</h1>
+    <div class="dream-list"></div>
+  </div>
 </template>
 
 <script lang="ts">
