@@ -8,3 +8,20 @@
   background-repeat: repeat-x;
   background-attachment: fixed;
 }
+
+@mixin backgroundGradient {
+  background: url("../assets/Background-full.svg"),
+    linear-gradient(
+      180deg,
+      rgba(2, 17, 54, 0) 42.83%,
+      rgba(91, 30, 82, 0.52) 100%
+    ),
+    #031138;
+  height: 100vh;
+  background-clip: border-box;
+  background-position-y: top;
+  background-position-x: center;
+  background-repeat: repeat-x;
+  background-size: cover;
+  background-attachment: fixed;
+}
