@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1 class="title">Journal</h1>
+    <DreamPreview />
     <div class="dream-list"></div>
     <NavBar />
   </div>
@@ -9,11 +10,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import NavBar from "@/components/NavBar.vue";
+import DreamPreview from "@/components/DreamPreview.vue";
 
 export default defineComponent({
   name: "Home",
   components: {
     NavBar,
+    DreamPreview,
   },
 });
 </script>
