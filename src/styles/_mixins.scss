@@ -30,6 +30,9 @@
 @mixin userForm {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  max-width: $content-width;
+  min-width: 280px;
   input {
     height: 60px;
     border-radius: 15px;

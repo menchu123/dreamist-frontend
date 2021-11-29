@@ -1,7 +1,8 @@
 <template>
   <div class="home">
     <h1 class="title">Journal</h1>
-    <div class="dream-list"></div>
+
+    <div class="dream-list"><DreamPreview /></div>
     <NavBar />
   </div>
 </template>
@@ -9,11 +10,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import NavBar from "@/components/NavBar.vue";
+import DreamPreview from "@/components/DreamPreview.vue";
 
 export default defineComponent({
   name: "Home",
   components: {
     NavBar,
+    DreamPreview,
   },
 });
 </script>
@@ -24,6 +27,10 @@ export default defineComponent({
 .home {
   @include backgroundDark;
   padding: 132px 20px 0;
+  .title {
+    max-width: $content-width;
+    margin: 0 auto 10px;
+  }
   .dream-list {
     height: calc(100vh - 110px - 150px);
     overflow-y: scroll;
