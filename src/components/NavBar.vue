@@ -18,4 +18,48 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import "./src/styles/variables";
+
+.nav {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  height: 87px;
+  width: 100%;
+  background-color: $darkBackground;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: $blue1;
+  border-top: 1px solid $blue1;
+  &__icon {
+    font-size: 30px;
+    &:active {
+      color: $lightgrey;
+    }
+  }
+  .router-link-active {
+    color: $lightgrey;
+  }
+  &__add-dream-button {
+    color: #fff;
+    line-height: 105px;
+    font-size: 72px;
+    background-color: $pink1;
+    height: 125px;
+    width: 125px;
+    text-align: center;
+    border-radius: 50%;
+    position: relative;
+    bottom: 10px;
+    user-select: none;
+    &:active {
+      background-color: $pink2;
+    }
+  }
+}
+</style>
