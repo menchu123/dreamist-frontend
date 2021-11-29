@@ -33,7 +33,6 @@ export default defineComponent({
 
 .dream-prev {
   background-color: $blue2;
-  margin-bottom: 20px;
   margin: 0 auto 20px;
   display: flex;
   justify-content: space-between;
