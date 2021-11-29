@@ -105,6 +105,16 @@
         </div>
       </div>
     </section>
+    <section class="form__attachments">
+      <p class="form__label form__label--attachments">Attachments</p>
+      <div class="form__attachment-button">
+        <label for="file" class="form__file-label"
+          ><font-awesome-icon icon="image"></font-awesome-icon
+        ></label>
+        <input type="file" name="file" id="file" class="form__file-input" />
+      </div>
+      <p class="file-selected">hola.jpg</p>
+    </section>
   </form>
 </template>
 
@@ -214,7 +224,34 @@ export default defineComponent({
       margin-right: 15px;
     }
   }
-
+  &__file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  &__attachment-button {
+    background-color: $blue2;
+    color: $blue1;
+    font-size: 30px;
+    height: 45px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    border-radius: 15px;
+    &:active {
+      background-color: $lightgrey;
+    }
+  }
+  .file-selected {
+    font-weight: 400;
+    font-size: 14px;
+    color: $lightgrey;
+    margin: 5px 4px;
+  }
   &__back {
     font-size: 25px;
   }
