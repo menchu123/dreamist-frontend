@@ -70,6 +70,41 @@
         </div>
       </div>
     </section>
+    <section class="form__mood">
+      <p class="form__label form__label--mood">How did you feel when you woke up?</p>
+      <div class="form__mood-buttons">
+        <div class="form__mood-button">
+          <input type="radio" id="1" name="mood" value="1" checked />
+          <label for="1" class="form__mood-button-label form__mood-button-label--1"
+            ><font-awesome-icon icon="grin"></font-awesome-icon
+          ></label>
+        </div>
+        <div class="form__mood-button">
+          <input type="radio" id="2" name="mood" value="2" />
+          <label for="2" class="form__mood-button-label form__mood-button-label--2"
+            ><font-awesome-icon icon="smile"></font-awesome-icon
+          ></label>
+        </div>
+        <div class="form__mood-button">
+          <input type="radio" id="3" name="mood" value="3" />
+          <label for="3" class="form__mood-button-label form__mood-button-label--3"
+            ><font-awesome-icon icon="meh"></font-awesome-icon
+          ></label>
+        </div>
+        <div class="form__mood-button">
+          <input type="radio" id="4" name="mood" value="4" />
+          <label for="4" class="form__mood-button-label form__mood-button-label--4"
+            ><font-awesome-icon icon="frown"></font-awesome-icon
+          ></label>
+        </div>
+        <div class="form__mood-button">
+          <input type="radio" id="5" name="mood" value="5" />
+          <label for="5" class="form__mood-button-label form__mood-button-label--5"
+            ><font-awesome-icon icon="grimace"></font-awesome-icon
+          ></label>
+        </div>
+      </div>
+    </section>
   </form>
 </template>
 
@@ -165,6 +200,21 @@ export default defineComponent({
     padding: 2px 8px;
     margin-right: 10px;
   }
+  &__mood-buttons {
+    input[type="radio"] {
+      display: none;
+    }
+    input[type="radio"]:checked + .form__mood-button-label {
+      color: $pink1;
+    }
+    display: flex;
+    font-size: 35px;
+    color: $blue1;
+    label {
+      margin-right: 15px;
+    }
+  }
+
   &__back {
     font-size: 25px;
   }
