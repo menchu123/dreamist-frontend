@@ -1,9 +1,11 @@
 <template>
   <form class="form" autocomplete="off" novalidate @submit.prevent>
     <div class="form__top-nav">
-      <div class="form__back">
-        <font-awesome-icon icon="angle-left"></font-awesome-icon>
-      </div>
+      <router-link to="/">
+        <div class="form__back">
+          <font-awesome-icon icon="angle-left"></font-awesome-icon>
+        </div>
+      </router-link>
       <button class="form__save">Save</button>
     </div>
     <section class="form__time">
@@ -27,9 +29,8 @@
     </section>
     <section class="form__description">
       <label for="description" class="form__label form__label--description">Description</label>
-      <input
+      <textarea
         class="form__input form__input--description"
-        type="text"
         name="description"
         id="description"
         placeholder="Write your description here..."
@@ -167,6 +168,10 @@ export default defineComponent({
   &__input--description {
     font-size: 16px;
     font-weight: 400;
+    font-family: inherit;
+    resize: horizontal;
+    overflow: hidden;
+    height: 100px;
   }
   &__input:focus-visible {
     outline: none;

@@ -2,7 +2,16 @@
   <div class="home">
     <h1 class="title">Journal</h1>
 
-    <div class="dream-list"><DreamPreview /></div>
+    <div class="dream-list">
+      <DreamPreview />
+      <DreamPreview />
+      <DreamPreview />
+      <DreamPreview />
+      <DreamPreview />
+      <DreamPreview />
+      <DreamPreview />
+      <DreamPreview />
+    </div>
     <NavBar />
   </div>
 </template>
