@@ -1,10 +1,31 @@
 <template>
   <section class="signup">
     <h1 class="signup__title">Create your account</h1>
-    <form action="" class="signup__form" novalidate autocomplete="off" @submit.prevent>
-      <input type="text" name="name" id="name" placeholder="Name" />
-      <input type="email" name="email" id="email" placeholder="Email address" />
-      <input type="password" name="password" id="password" placeholder="Password" />
+    <form
+      action=""
+      class="signup__form"
+      novalidate
+      autocomplete="off"
+      @submit.prevent
+    >
+      <input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Name"
+      />
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email address"
+      />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+      />
       <button type="submit">SIGN UP</button>
     </form>
     <div class="bottom-link">

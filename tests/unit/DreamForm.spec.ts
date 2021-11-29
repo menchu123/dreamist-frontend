@@ -9,10 +9,16 @@ describe("Given a Header component", () => {
         global: {
           plugins: [router],
         },
-        stubs: ["router-link", "router-view", "FontAwesomeIcon"],
+        stubs: [
+          "router-link",
+          "router-view",
+          "FontAwesomeIcon",
+        ],
       });
 
-      expect(wrapper.html()).toContain('<form class="form" autocomplete="off" novalidate="">');
+      expect(wrapper.html()).toContain(
+        '<form class="form" autocomplete="off" novalidate="">'
+      );
     });
   });
 });

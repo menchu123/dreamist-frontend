@@ -1,9 +1,25 @@
 <template>
   <section class="login">
     <h1 class="login__title">Welcome back!</h1>
-    <form action="" class="login__form" novalidate autocomplete="off" @submit.prevent>
-      <input type="email" name="email" id="email" placeholder="Email address" />
-      <input type="password" name="password" id="password" placeholder="Password" />
+    <form
+      action=""
+      class="login__form"
+      novalidate
+      autocomplete="off"
+      @submit.prevent
+    >
+      <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email address"
+      />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+      />
       <button type="submit">LOG IN</button>
     </form>
     <div class="bottom-link">
