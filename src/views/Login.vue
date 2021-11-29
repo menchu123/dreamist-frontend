@@ -25,4 +25,23 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import "./src/styles/variables";
+@import "./src/styles/mixins";
+.login {
+  @include backgroundGradient;
+  overflow: hidden;
+  padding: 132px 20px 0;
+  &__title {
+    text-align: center;
+    margin-top: 20px;
+  }
+  &__form {
+    @include userForm;
+    margin-top: 100px;
+  }
+  .bottom-link {
+    @include bottomLink;
+  }
+}
+</style>

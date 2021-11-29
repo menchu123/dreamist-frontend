@@ -25,3 +25,73 @@
   background-size: cover;
   background-attachment: fixed;
 }
+
+@mixin userForm {
+  display: flex;
+  flex-direction: column;
+  input {
+    height: 60px;
+    border-radius: 15px;
+    border: none;
+    margin-bottom: 20px;
+    background-color: $lightgrey;
+    padding: 0 20px;
+    font-size: 16px;
+  }
+  input:focus-visible {
+    outline: none;
+  }
+  ::placeholder {
+    font-family: $font-family;
+    letter-spacing: 0.05em;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  button {
+    background-color: $pink1;
+    border: none;
+    color: $lightgrey;
+    font-size: 14px;
+    font-weight: 500;
+    height: 60px;
+    border-radius: 50px;
+  }
+  button:active {
+    background-color: $pink2;
+  }
+}
+
+@mixin bottomLink {
+  p,
+  span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  span {
+    color: $pink1;
+  }
+  span:active {
+    color: $pink2;
+  }
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+}
+
+@mixin button {
+  background-color: $pink1;
+  padding: 0 20px;
+  border: none;
+  color: $lightgrey;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 200;
+  &:active {
+    background-color: $pink2;
+  }
+}
