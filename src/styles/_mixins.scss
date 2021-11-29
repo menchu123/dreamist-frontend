@@ -1,0 +1,10 @@
+@import "./variables";
+
+@mixin backgroundDark {
+  background-color: $darkBackground;
+  min-height: 100vh;
+  background-image: url("../assets/Background.svg");
+  background-position-y: top;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+}
