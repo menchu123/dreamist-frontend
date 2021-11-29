@@ -1,0 +1,309 @@
+<template>
+  <form class="form" autocomplete="off" novalidate @submit.prevent>
+    <div class="form__top-nav">
+      <div class="form__back">
+        <font-awesome-icon icon="angle-left"></font-awesome-icon>
+      </div>
+      <button class="form__save">Save</button>
+    </div>
+    <section class="form__time">
+      <div class="form__time">
+        <font-awesome-icon class="form__moon" icon="moon"></font-awesome-icon>
+        <span class="datepicker-toggle">
+          <span class="datepicker-toggle-button">Sun, 21 November 2021</span>
+          <input type="date" class="datepicker-input" />
+        </span>
+      </div>
+    </section>
+    <section class="form__title">
+      <label for="title" class="form__label form__label--title">Title</label>
+      <input
+        class="form__input form__input--title"
+        type="text"
+        name="title"
+        id="title"
+        placeholder="Write your title here..."
+      />
+    </section>
+    <section class="form__description">
+      <label for="description" class="form__label form__label--description">Description</label>
+      <input
+        class="form__input form__input--description"
+        type="text"
+        name="description"
+        id="description"
+        placeholder="Write your description here..."
+      />
+    </section>
+    <section class="form__category">
+      <p class="form__label form__label--category">How do we categorize your dream?</p>
+      <div class="form__category-buttons">
+        <div class="form__category-button">
+          <input type="radio" id="normal" name="category" value="normal" checked />
+          <label
+            for="normal"
+            class="form__category-button-label form__category-button-label--normal"
+            >NORMAL</label
+          >
+        </div>
+        <div class="form__category-button">
+          <input type="radio" id="lucid" name="category" value="lucid" />
+          <label for="lucid" class="form__category-button-label form__category-button-label--lucid"
+            >LUCID</label
+          >
+        </div>
+        <div class="form__category-button">
+          <input type="radio" id="nightmare" name="category" value="nightmare" />
+          <label
+            for="nightmare"
+            class="form__category-button-label form__category-button-label--nightmare"
+            >NIGHTMARE</label
+          >
+        </div>
+        <div class="form__category-button">
+          <input type="radio" id="daydream" name="category" value="daydream" />
+          <label
+            for="daydream"
+            class="form__category-button-label form__category-button-label--daydream"
+            >DAYDREAM</label
+          >
+        </div>
+      </div>
+    </section>
+    <section class="form__mood">
+      <p class="form__label form__label--mood">How did you feel when you woke up?</p>
+      <div class="form__mood-buttons">
+        <div class="form__mood-button">
+          <input type="radio" id="1" name="mood" value="1" checked />
+          <label for="1" class="form__mood-button-label form__mood-button-label--1"
+            ><font-awesome-icon icon="grin"></font-awesome-icon
+          ></label>
+        </div>
+        <div class="form__mood-button">
+          <input type="radio" id="2" name="mood" value="2" />
+          <label for="2" class="form__mood-button-label form__mood-button-label--2"
+            ><font-awesome-icon icon="smile"></font-awesome-icon
+          ></label>
+        </div>
+        <div class="form__mood-button">
+          <input type="radio" id="3" name="mood" value="3" />
+          <label for="3" class="form__mood-button-label form__mood-button-label--3"
+            ><font-awesome-icon icon="meh"></font-awesome-icon
+          ></label>
+        </div>
+        <div class="form__mood-button">
+          <input type="radio" id="4" name="mood" value="4" />
+          <label for="4" class="form__mood-button-label form__mood-button-label--4"
+            ><font-awesome-icon icon="frown"></font-awesome-icon
+          ></label>
+        </div>
+        <div class="form__mood-button">
+          <input type="radio" id="5" name="mood" value="5" />
+          <label for="5" class="form__mood-button-label form__mood-button-label--5"
+            ><font-awesome-icon icon="grimace"></font-awesome-icon
+          ></label>
+        </div>
+      </div>
+    </section>
+    <section class="form__attachments">
+      <p class="form__label form__label--attachments">Attachments</p>
+      <div class="form__attachment-button">
+        <label for="file" class="form__file-label"
+          ><font-awesome-icon icon="image"></font-awesome-icon
+        ></label>
+        <input type="file" name="file" id="file" class="form__file-input" />
+      </div>
+      <p class="file-selected">hola.jpg</p>
+    </section>
+  </form>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "DreamForm",
+});
+</script>
+
+<style lang="scss">
+@import "./src/styles/variables";
+@import "./src/styles/mixins";
+
+.form {
+  min-height: 100vh;
+  padding: 0 20px;
+  max-width: $content-width;
+  min-width: 280px;
+  margin: 0 auto;
+  &__top-nav {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 100px;
+    padding-bottom: 15px;
+  }
+  &__label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #9aa0af;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  &__input {
+    background-color: transparent;
+    border: none;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 135%;
+    width: 100%;
+    color: $lightgrey;
+    letter-spacing: 0.05em;
+  }
+  &__input::placeholder {
+    color: $blue1;
+  }
+  &__input--description {
+    font-size: 16px;
+    font-weight: 400;
+  }
+  &__input:focus-visible {
+    outline: none;
+  }
+  &__category-buttons {
+    input[type="radio"] {
+      display: none;
+    }
+    input[type="radio"]:checked + .form__category-button-label--normal {
+      background-color: $normal;
+    }
+    input[type="radio"]:checked + .form__category-button-label--lucid {
+      background-color: $lucid;
+    }
+    input[type="radio"]:checked + .form__category-button-label--nightmare {
+      background-color: $nightmare;
+    }
+    input[type="radio"]:checked + .form__category-button-label--daydream {
+      background-color: $daydream;
+    }
+    display: flex;
+    align-items: center;
+    height: 45px;
+    background-color: $blue2;
+    border-radius: 15px;
+    padding: 0 15px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  &__category-button-label {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 15px;
+    text-align: center;
+    border: 1px solid $lightgrey;
+    border-radius: 6px;
+    padding: 2px 8px;
+    margin-right: 10px;
+  }
+  &__mood-buttons {
+    input[type="radio"] {
+      display: none;
+    }
+    input[type="radio"]:checked + .form__mood-button-label {
+      color: $pink1;
+    }
+    display: flex;
+    font-size: 35px;
+    color: $blue1;
+    label {
+      margin-right: 15px;
+    }
+  }
+  &__file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  &__attachment-button {
+    background-color: $blue2;
+    color: $blue1;
+    font-size: 30px;
+    height: 45px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    border-radius: 15px;
+    &:active {
+      background-color: $lightgrey;
+    }
+  }
+  .file-selected {
+    font-weight: 400;
+    font-size: 14px;
+    color: $lightgrey;
+    margin: 5px 4px;
+  }
+  &__back {
+    font-size: 25px;
+  }
+  &__save {
+    @include button;
+  }
+  &__moon {
+    margin-right: 10px;
+  }
+  &__time {
+    width: 100%;
+    background-color: $blue2;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px;
+    .datepicker-toggle {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      height: 19px;
+      .datepicker-toggle-button {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .datepicker-input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+        box-sizing: border-box;
+      }
+      .datepicker-input::-webkit-calendar-picker-indicator {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+      }
+    }
+  }
+}
+</style>
