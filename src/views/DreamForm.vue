@@ -255,7 +255,7 @@ export default defineComponent({
     font-weight: 400;
     font-size: 14px;
     color: $lightgrey;
-    margin: 5px 4px;
+    margin: 10px 4px;
   }
   &__back {
     font-size: 25px;
