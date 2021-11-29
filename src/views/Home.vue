@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <h1 class="title">Journal</h1>
-    <DreamPreview />
-    <div class="dream-list"></div>
+
+    <div class="dream-list"><DreamPreview /></div>
     <NavBar />
   </div>
 </template>

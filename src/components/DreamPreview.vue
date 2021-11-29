@@ -34,6 +34,7 @@ export default defineComponent({
   align-items: center;
   width: 100%;
   max-width: $content-width;
+  min-width: 280px;
   min-height: 126px;
   border-radius: 15px;
   &__prev {
