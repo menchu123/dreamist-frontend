@@ -2,14 +2,19 @@
   <div class="home">
     <h1 class="title">Journal</h1>
     <div class="dream-list"></div>
+    <NavBar />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import NavBar from "@/components/NavBar.vue";
 
 export default defineComponent({
   name: "Home",
+  components: {
+    NavBar,
+  },
 });
 </script>
 
