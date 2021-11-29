@@ -9,7 +9,7 @@ describe("Given a Header component", () => {
         global: {
           plugins: [router],
         },
-        stubs: ["router-link", "router-view"],
+        stubs: ["router-link", "router-view", "FontAwesomeIcon"],
       });
 
       expect(wrapper.html()).toContain('<section class="login">');
