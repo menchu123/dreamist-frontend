@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <h1 class="title">Journal</h1>
+    <div class="dream-list"></div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'Home',
-  components: {
-    HelloWorld,
-  },
+  name: "Home",
 });
 </script>
+
+<style lang="scss">
+@import "./src/styles/variables";
+@import "./src/styles/mixins";
+.home {
+  @include backgroundDark;
+  padding: 132px 20px 0;
+  .dream-list {
+    height: calc(100vh - 110px - 150px);
+    overflow-y: scroll;
+    padding-bottom: 30px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+</style>
