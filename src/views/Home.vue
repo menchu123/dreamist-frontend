@@ -3,17 +3,8 @@
     <h1 class="title">Journal</h1>
 
     <ul class="dream-list">
-      <li
-        class="dream-list__dream"
-        v-for="dream in dreams"
-        :key="dream.id"
-      >
-        <DreamPreview
-          :title="dream.title"
-          :description="dream.description"
-          :date="dream.date"
-          :type="dream.type.toUpperCase()"
-        />
+      <li class="dream-list__dream" v-for="dream in dreams" :key="dream.id">
+        <DreamPreview :dream="dream" />
       </li>
     </ul>
     <NavBar />
