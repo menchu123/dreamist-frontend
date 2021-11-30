@@ -116,14 +116,30 @@
     </section>
     <section class="form__attachments">
       <p class="form__label form__label--attachments">Attachments</p>
-      <div class="form__attachment-button">
+      <div
+        :class="previewImage === null ? '' : 'form__attachment-button--hidden'"
+        class="form__attachment-button"
+      >
         <label for="file" class="form__file-label"
           ><font-awesome-icon icon="image"></font-awesome-icon
         ></label>
-        <input type="file" name="file" id="file" class="form__file-input" />
+        <input
+          ref="fileInput"
+          @input="previewFile"
+          type="file"
+          name="file"
+          id="file"
+          class="form__file-input"
+        />
       </div>
-      <p class="file-selected">hola.jpg</p>
+      <div
+        v-if="previewImage !== null"
+        class="imagePreviewWrapper"
+        :style="{ 'background-image': `url(${previewImage})` }"
+        @click="removeFile()"
+      ></div>
     </section>
+    <section class="footer"></section>
   </form>
 </template>
 
@@ -135,12 +151,31 @@ export default defineComponent({
   data() {
     return {
       date: new Date().toISOString().split("T")[0],
+      previewImage: null,
     };
   },
   methods: {
     adjustSize(textarea: HTMLElement) {
       textarea.style.height = "auto";
       textarea.style.height = `${textarea.scrollHeight}px`;
+    },
+    previewFile() {
+      const input: HTMLInputElement = this.$refs.fileInput as HTMLInputElement;
+      const file = input.files;
+      if (file && file[0]) {
+        const reader = new FileReader();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        reader.onload = (event: any) => {
+          this.previewImage = event.target.result;
+        };
+        reader.readAsDataURL(file[0]);
+        this.$emit("input", file[0]);
+      }
+    },
+    removeFile() {
+      this.previewImage = null;
+      const input: HTMLInputElement = this.$refs.fileInput as HTMLInputElement;
+      input.files = null;
     },
   },
 });
@@ -149,9 +184,22 @@ export default defineComponent({
 <style lang="scss">
 @import "./src/styles/variables";
 @import "./src/styles/mixins";
-
+.footer {
+  height: 20px;
+}
+.imagePreviewWrapper {
+  width: 100%;
+  height: 250px;
+  display: block;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  background-size: cover;
+  background-position: center center;
+}
 .form {
   min-height: 100vh;
+  height: 100%;
   padding: 0 20px;
   max-width: $content-width;
   min-width: 280px;
@@ -270,6 +318,10 @@ export default defineComponent({
     &:active {
       background-color: $lightgrey;
     }
+  }
+  &__attachment-button--hidden {
+    visibility: hidden;
+    height: 10px;
   }
   .file-selected {
     font-weight: 400;
