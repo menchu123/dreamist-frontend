@@ -10,6 +10,13 @@ describe("Given a Header component", () => {
           plugins: [router],
         },
         stubs: ["router-link", "router-view", "FontAwesomeIcon"],
+        props: {
+          dream: {
+            date: "2",
+            description: "hola",
+            type: "normal",
+          },
+        },
       });
 
       expect(wrapper.html()).toContain('<section class="dream-prev">');
