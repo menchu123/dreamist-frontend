@@ -1,13 +1,13 @@
 <template>
   <section class="dream-prev">
-    <div class="dream-prev__date">JAN 1</div>
+    <div class="dream-prev__date">{{ dreamDate() }}</div>
     <div class="dream-prev__moon">
       <font-awesome-icon icon="moon"></font-awesome-icon>
     </div>
     <div class="dream-prev__prev">
-      <h2 class="dream-prev__title">{{ title }}</h2>
-      <p class="dream-prev__text">{{ description }}...</p>
-      <section class="dream-prev__type">{{ type }}</section>
+      <h2 class="dream-prev__title">{{ dream.title }}</h2>
+      <p class="dream-prev__text">{{ dreamDescription() }}</p>
+      <section class="dream-prev__type" :class="dream.type">{{ dreamType() }}</section>
     </div>
   </section>
 </template>
@@ -17,14 +17,25 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "DreamPreview",
-  props: {
-    title: String,
-    description: String,
-    date: String,
-    type: String,
-    _id: String,
+  props: ["dream"],
+  methods: {
+    dreamType() {
+      return this.dream.type.toUpperCase();
+    },
+    dreamDate() {
+      const date = new Date(this.dream.date)
+        .toLocaleString("en-US", { month: "short", day: "numeric" })
+        .toUpperCase();
+      return date;
+    },
+    dreamDescription() {
+      const longDescription = `${this.dream.description.substring(0, 72)}...`;
+      if (this.dream.description.length > 70) {
+        return longDescription;
+      }
+      return this.dream.description;
+    },
   },
-  methods: {},
 });
 </script>
 
@@ -42,11 +53,13 @@ export default defineComponent({
   min-width: 280px;
   min-height: 126px;
   border-radius: 15px;
+  padding-left: 10px;
   &__prev {
     width: 235px;
   }
   &__text {
-    min-height: 60px;
+    height: 60px;
+    overflow: hidden;
   }
   &__date {
     font-size: 20px;
@@ -64,7 +77,19 @@ export default defineComponent({
     letter-spacing: 0.05em;
     border: 1px solid $lightgrey;
     border-radius: 6px;
-    background-color: #00b5b8;
+  }
+  .normal {
+    background-color: $normal;
+    display: none;
+  }
+  .lucid {
+    background-color: $lucid;
+  }
+  .nightmare {
+    background-color: $nightmare;
+  }
+  .daydream {
+    background-color: $daydream;
   }
 }
 </style>
