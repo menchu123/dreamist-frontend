@@ -9,16 +9,10 @@ describe("Given a Header component", () => {
         global: {
           plugins: [router],
         },
-        stubs: [
-          "router-link",
-          "router-view",
-          "FontAwesomeIcon",
-        ],
+        stubs: ["router-link", "router-view", "FontAwesomeIcon"],
       });
 
-      expect(wrapper.html()).toContain(
-        '<section class="dream-prev">'
-      );
+      expect(wrapper.html()).toContain('<section class="dream-prev">');
     });
   });
 });
