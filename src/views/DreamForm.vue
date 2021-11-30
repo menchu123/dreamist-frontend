@@ -236,7 +236,6 @@ export default defineComponent({
     font-size: 16px;
     font-weight: 400;
     font-family: inherit;
-    resize: horizontal;
     overflow: hidden;
     resize: none;
     height: auto;
