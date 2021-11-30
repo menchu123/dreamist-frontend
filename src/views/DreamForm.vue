@@ -12,8 +12,15 @@
       <div class="form__time">
         <font-awesome-icon class="form__moon" icon="moon"></font-awesome-icon>
         <span class="datepicker-toggle">
-          <span class="datepicker-toggle-button">Sun, 21 November 2021</span>
-          <input type="date" class="datepicker-input" />
+          <span class="datepicker-toggle-button">{{
+            new Date(date).toLocaleString("en-US", {
+              weekday: "short",
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })
+          }}</span>
+          <input type="date" class="datepicker-input" v-model="date" />
         </span>
       </div>
     </section>
@@ -125,6 +132,11 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "DreamForm",
+  data() {
+    return {
+      date: new Date().toISOString().split("T")[0],
+    };
+  },
   methods: {
     adjustSize(textarea: HTMLElement) {
       textarea.style.height = "auto";
