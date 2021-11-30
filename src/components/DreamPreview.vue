@@ -23,10 +23,9 @@ export default defineComponent({
       return this.dream.type.toUpperCase();
     },
     dreamDate() {
-      const date = new Date(this.dream.date)
+      return new Date(this.dream.date)
         .toLocaleString("en-US", { month: "short", day: "numeric" })
         .toUpperCase();
-      return date;
     },
     dreamDescription() {
       const longDescription = `${this.dream.description.substring(0, 72)}...`;
