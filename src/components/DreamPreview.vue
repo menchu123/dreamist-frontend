@@ -6,7 +6,7 @@
     </div>
     <div class="dream-prev__prev">
       <h2 class="dream-prev__title">{{ dream.title }}</h2>
-      <p class="dream-prev__text">{{ dream.description }}</p>
+      <p class="dream-prev__text">{{ dreamDescription() }}</p>
       <section class="dream-prev__type" :class="dream.type">{{ dreamType() }}</section>
     </div>
   </section>
@@ -28,6 +28,13 @@ export default defineComponent({
         .toUpperCase();
       return date;
     },
+    dreamDescription() {
+      const longDescription = `${this.dream.description.substring(0, 72)}...`;
+      if (this.dream.description.length > 70) {
+        return longDescription;
+      }
+      return this.dream.description;
+    },
   },
 });
 </script>
@@ -46,11 +53,13 @@ export default defineComponent({
   min-width: 280px;
   min-height: 126px;
   border-radius: 15px;
+  padding-left: 10px;
   &__prev {
     width: 235px;
   }
   &__text {
-    min-height: 60px;
+    height: 60px;
+    overflow: hidden;
   }
   &__date {
     font-size: 20px;
