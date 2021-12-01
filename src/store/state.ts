@@ -7,6 +7,7 @@ const state = {
       userId: "",
     },
   },
+  isLoading: false,
 };
 
 export default state;

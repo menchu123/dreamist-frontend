@@ -19,6 +19,7 @@ interface State {
     isAuthenticated: boolean;
     user: User;
   };
+  isLoading: boolean;
 }
 interface UserLoginData {
   username: string;

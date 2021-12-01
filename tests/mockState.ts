@@ -9,6 +9,7 @@ const stateMock = {
       userId: "098",
     },
   },
+  isLoading: false,
 };
 
 export default stateMock as unknown as State;

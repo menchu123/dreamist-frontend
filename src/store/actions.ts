@@ -5,6 +5,7 @@ import { State, User } from "@/types/interfaces";
 
 const actions = {
   async getDreamsFromApi({ commit }: ActionContext<State, State>): Promise<void | string> {
+    commit("startLoading");
     try {
       const { token } = JSON.parse(localStorage.getItem("token") || "");
       const { data } = await axios.get(`${process.env.VUE_APP_API_URL}/dreams/user-dreams`, {
@@ -13,6 +14,7 @@ const actions = {
         },
       });
       commit("loadDreams", data);
+      commit("stopLoading");
     } catch {
       return "Error fetching dreams";
     }
