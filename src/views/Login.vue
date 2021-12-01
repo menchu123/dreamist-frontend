@@ -9,6 +9,7 @@
         placeholder="Username"
         v-model="username"
         :class="{ wrong: wrongCredentials, shake: wrongCredentials }"
+        maxlength="30"
       />
       <input
         type="password"
@@ -17,6 +18,7 @@
         placeholder="Password"
         v-model="password"
         :class="{ wrong: wrongCredentials, shake: wrongCredentials }"
+        maxlength="30"
       />
       <button type="submit" :disabled="username === '' || password === ''">LOG IN</button>
       <span v-if="wrongCredentials" class="wrong-credentials"
