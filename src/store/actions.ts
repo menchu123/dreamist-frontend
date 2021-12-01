@@ -1,6 +1,7 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 import { ActionContext } from "vuex";
-import { State } from "@/types/interfaces";
+import { State, User } from "@/types/interfaces";
 
 const actions = {
   async getDreamsFromApi({ commit }: ActionContext<State, State>): Promise<void> {
@@ -10,6 +11,13 @@ const actions = {
       },
     });
     commit("loadDreams", data);
+  },
+  async loginUser({ commit }: ActionContext<State, State>, user: User): Promise<void> {
+    const { data } = await axios.post(`${process.env.VUE_APP_API_URL}/users/login`, user);
+    const { token } = data;
+    const userInfo = jwtDecode(token);
+    localStorage.setItem("token", JSON.stringify({ token }));
+    commit("loadUser", userInfo);
   },
 };
 
