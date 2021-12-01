@@ -60,6 +60,9 @@
     height: 60px;
     border-radius: 50px;
   }
+  button:disabled {
+    background-color: $pink3;
+  }
   button:active {
     background-color: $pink2;
   }
