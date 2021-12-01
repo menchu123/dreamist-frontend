@@ -24,12 +24,19 @@ export default defineComponent({
     DreamPreview,
   },
   computed: {
-    ...mapState(["dreams"]),
+    ...mapState(["dreams", "user"]),
   },
   methods: {
-    ...mapActions(["getDreamsFromApi"]),
+    ...mapActions(["getDreamsFromApi", "checkToken"]),
+    redirectToLogin() {
+      if (!this.user.isAuthenticated) {
+        this.$router.push("/login");
+      }
+    },
   },
   mounted() {
+    this.checkToken();
+    this.redirectToLogin();
     this.getDreamsFromApi();
   },
 });
