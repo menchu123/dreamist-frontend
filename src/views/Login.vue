@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default defineComponent({
   name: "Login",
@@ -48,8 +48,11 @@ export default defineComponent({
       wrongCredentials: false,
     };
   },
+  computed: {
+    ...mapState(["user"]),
+  },
   methods: {
-    ...mapActions(["loginUser"]),
+    ...mapActions(["loginUser", "checkToken"]),
     async onSubmit() {
       this.wrongCredentials = false;
       try {
@@ -65,6 +68,15 @@ export default defineComponent({
         this.wrongCredentials = true;
       }
     },
+    redirectToLogin() {
+      if (this.user.isAuthenticated) {
+        this.$router.push("/");
+      }
+    },
+  },
+  mounted() {
+    this.checkToken();
+    this.redirectToLogin();
   },
 });
 </script>

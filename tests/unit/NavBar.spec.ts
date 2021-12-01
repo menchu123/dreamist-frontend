@@ -2,23 +2,17 @@ import { mount } from "@vue/test-utils";
 import router from "../../src/router";
 import NavBar from "../../src/components/NavBar.vue";
 
-describe("Given a Header component", () => {
+describe("Given a NavBar component", () => {
   describe("When is rendered", () => {
-    test("Should render the header html tag", () => {
+    test("Should render the section html tag", () => {
       const wrapper = mount(NavBar, {
         global: {
           plugins: [router],
         },
-        stubs: [
-          "router-link",
-          "router-view",
-          "FontAwesomeIcon",
-        ],
+        stubs: ["router-link", "router-view", "FontAwesomeIcon"],
       });
 
-      expect(wrapper.html()).toContain(
-        '<section class="nav">'
-      );
+      expect(wrapper.html()).toContain('<section class="nav">');
     });
   });
 });
