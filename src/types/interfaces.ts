@@ -8,8 +8,21 @@ interface Dream {
   mood: string;
 }
 
-interface State {
-  dreams: Array<Dream>;
+interface User {
+  userName: string;
+  userId: string;
 }
 
-export { State, Dream };
+interface State {
+  dreams: Array<Dream>;
+  user: {
+    isAuthenticated: boolean;
+    user: User;
+  };
+}
+interface UserLoginData {
+  username: string;
+  password: string;
+}
+
+export { State, Dream, User, UserLoginData };
