@@ -5,9 +5,10 @@ import { State, User } from "@/types/interfaces";
 
 const actions = {
   async getDreamsFromApi({ commit }: ActionContext<State, State>): Promise<void> {
+    const { token } = JSON.parse(localStorage.getItem("token") || "");
     const { data } = await axios.get(`${process.env.VUE_APP_API_URL}/dreams/user-dreams`, {
       headers: {
-        Authorization: `Bearer ${process.env.VUE_APP_TOKEN}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     commit("loadDreams", data);
@@ -18,6 +19,14 @@ const actions = {
     const userInfo = jwtDecode(token);
     localStorage.setItem("token", JSON.stringify({ token }));
     commit("loadUser", userInfo);
+  },
+  checkToken({ commit }: ActionContext<State, State>): string | void {
+    try {
+      const token = JSON.parse(localStorage.getItem("token") || "");
+      commit("loadUser", jwtDecode(token.token));
+    } catch {
+      return "Not logged in";
+    }
   },
 };
 
