@@ -3,7 +3,9 @@
     <router-link to="/">
       <font-awesome-icon class="nav__icon nav__icon-book" icon="book"></font-awesome-icon>
     </router-link>
-    <router-link to="/dream-form" class="nav__add-dream-button">+ </router-link>
+    <router-link to="/dream-form" class="nav__add-dream-button"
+      ><font-awesome-icon icon="plus"></font-awesome-icon
+    ></router-link>
     <font-awesome-icon class="nav__icon nav__icon-stats" icon="chart-pie"></font-awesome-icon>
   </section>
 </template>
@@ -45,8 +47,7 @@ export default defineComponent({
   }
   &__add-dream-button {
     color: #fff;
-    line-height: 105px;
-    font-size: 72px;
+    font-size: 40px;
     background-color: $pink1;
     height: 125px;
     width: 125px;
@@ -55,6 +56,9 @@ export default defineComponent({
     position: relative;
     bottom: 10px;
     user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:active {
       background-color: $pink2;
     }
