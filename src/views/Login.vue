@@ -70,7 +70,7 @@ export default defineComponent({
         this.wrongCredentials = true;
       }
     },
-    redirectToLogin() {
+    redirectToHome() {
       if (this.user.isAuthenticated) {
         this.$router.push("/");
       }
@@ -78,7 +78,7 @@ export default defineComponent({
   },
   mounted() {
     this.checkToken();
-    this.redirectToLogin();
+    this.redirectToHome();
   },
 });
 </script>

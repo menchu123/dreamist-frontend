@@ -40,6 +40,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { mapActions, mapState } from "vuex";
 import axios from "axios";
 
 export default defineComponent({
@@ -53,7 +54,11 @@ export default defineComponent({
       wrongCredentials: false,
     };
   },
+  computed: {
+    ...mapState(["user"]),
+  },
   methods: {
+    ...mapActions(["checkToken"]),
     async onSubmit() {
       this.wrongCredentials = false;
       const newUser = {
@@ -68,6 +73,15 @@ export default defineComponent({
         this.wrongCredentials = true;
       }
     },
+    redirectToHome() {
+      if (this.user.isAuthenticated) {
+        this.$router.push("/");
+      }
+    },
+  },
+  mounted() {
+    this.checkToken();
+    this.redirectToHome();
   },
 });
 </script>
