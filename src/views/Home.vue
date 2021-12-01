@@ -1,8 +1,18 @@
 <template>
   <div class="home">
     <h1 class="title">Journal</h1>
-
-    <ul class="dream-list">
+    <section v-if="isLoading" class="loading">
+      <div class="lds-ripple">
+        <div></div>
+        <div></div>
+      </div>
+    </section>
+    <section v-else-if="noDreams()" class="no-dreams">
+      You have not yet logged any dreams<span class="no-dreams--small"
+        >When you are ready, tap below to record your first dream</span
+      >
+    </section>
+    <ul v-else class="dream-list">
       <li class="dream-list__dream" v-for="dream in dreams" :key="dream.id">
         <DreamPreview :dream="dream" />
       </li>
@@ -24,7 +34,7 @@ export default defineComponent({
     DreamPreview,
   },
   computed: {
-    ...mapState(["dreams", "user"]),
+    ...mapState(["dreams", "user", "isLoading"]),
   },
   methods: {
     ...mapActions(["getDreamsFromApi", "checkToken"]),
@@ -32,6 +42,12 @@ export default defineComponent({
       if (!this.user.isAuthenticated) {
         this.$router.push("/login");
       }
+    },
+    noDreams() {
+      if (this.dreams.length === 0) {
+        return true;
+      }
+      return false;
     },
   },
   mounted() {
@@ -45,8 +61,28 @@ export default defineComponent({
 <style lang="scss">
 @import "./src/styles/variables";
 @import "./src/styles/mixins";
+.no-dreams {
+  font-size: 28px;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 200px;
+  &--small {
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
+  }
+}
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
 .home {
   @include backgroundDark;
+  @include loading;
   padding: 132px 20px 0;
   .title {
     max-width: $content-width;
