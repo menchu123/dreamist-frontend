@@ -1,18 +1,10 @@
 <template>
   <section class="nav">
     <router-link to="/">
-      <font-awesome-icon
-        class="nav__icon nav__icon-book"
-        icon="book"
-      ></font-awesome-icon>
+      <font-awesome-icon class="nav__icon nav__icon-book" icon="book"></font-awesome-icon>
     </router-link>
-    <router-link to="/dream-form">
-      <div class="nav__add-dream-button">+</div>
-    </router-link>
-    <font-awesome-icon
-      class="nav__icon nav__icon-stats"
-      icon="chart-pie"
-    ></font-awesome-icon>
+    <router-link to="/dream-form" class="nav__add-dream-button">+ </router-link>
+    <font-awesome-icon class="nav__icon nav__icon-stats" icon="chart-pie"></font-awesome-icon>
   </section>
 </template>
 

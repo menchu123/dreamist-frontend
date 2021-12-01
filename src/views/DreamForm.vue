@@ -155,7 +155,8 @@ export default defineComponent({
     };
   },
   methods: {
-    adjustSize(textarea: HTMLElement) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    adjustSize(textarea: any) {
       textarea.style.height = "auto";
       textarea.style.height = `${textarea.scrollHeight}px`;
     },
