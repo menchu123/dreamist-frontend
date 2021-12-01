@@ -1,9 +1,8 @@
 interface Dream {
-  _id: string;
+  id: string;
   title: string;
   description: string;
   date: string;
-  image: string;
   type: string;
   mood: string;
 }
