@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { ActionContext } from "vuex";
-import { State, User, Dream } from "@/types/interfaces";
+import { State, User, Dream, DreamToUpdate } from "@/types/interfaces";
 
 const actions = {
   async getDreamsFromApi({ commit }: ActionContext<State, State>): Promise<void | string> {
@@ -58,6 +58,22 @@ const actions = {
     });
 
     commit("deleteCurrentDream", id);
+    commit("stopLoading");
+  },
+  async updateDream({ commit }: ActionContext<State, State>, dream: DreamToUpdate): Promise<void> {
+    commit("startLoading");
+    const { token } = JSON.parse(localStorage.getItem("token") || "");
+    const { data: updatedDream } = await axios.put(
+      `${process.env.VUE_APP_API_URL}/dreams/user-dreams/edit/${dream.id}`,
+      dream.formData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    commit("updateDream", updatedDream);
     commit("stopLoading");
   },
   async loginUser({ commit }: ActionContext<State, State>, user: User): Promise<void> {
