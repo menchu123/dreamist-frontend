@@ -20,6 +20,9 @@ const mutations = {
   stopLoading(state: State): void {
     state.isLoading = false;
   },
+  deleteCurrentDream(state: State, payload: string): void {
+    state.dreams = state.dreams.filter((dream: Dream) => dream.id !== payload);
+  },
 };
 
 export default mutations;
