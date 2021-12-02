@@ -166,6 +166,7 @@ export default defineComponent({
       mood: "1",
       category: "normal",
       previewImage: null,
+      image: {} as File,
     };
   },
   methods: {
@@ -179,6 +180,7 @@ export default defineComponent({
       const input: HTMLInputElement = this.$refs.fileInput as HTMLInputElement;
       const file = input.files;
       if (file && file[0]) {
+        [this.image] = file;
         const reader = new FileReader();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         reader.onload = (event: any) => {
@@ -201,6 +203,9 @@ export default defineComponent({
       newDream.append("mood", this.mood);
       newDream.append("type", this.category);
       newDream.append("date", date);
+      if (this.image.name) {
+        newDream.append("image", this.image);
+      }
       this.addDream(newDream);
     },
   },

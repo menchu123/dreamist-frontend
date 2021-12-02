@@ -23,7 +23,7 @@ const actions = {
     try {
       const { token } = JSON.parse(localStorage.getItem("token") || "");
       const { data: newDream } = await axios.post(
-        `http://localhost:3500/dreams/user-dreams/new`,
+        `${process.env.VUE_APP_API_URL}/dreams/user-dreams/new`,
         dream,
         {
           headers: {
