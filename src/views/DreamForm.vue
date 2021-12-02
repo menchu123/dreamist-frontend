@@ -38,13 +38,14 @@
     </section>
     <section class="form__title">
       <label for="title" class="form__label form__label--title">Title</label>
-      <input
+      <textarea
         class="form__input form__input--title"
-        type="text"
         name="title"
         id="title"
         placeholder="Write your title here..."
         v-model="title"
+        @input="adjustSize($event.target)"
+        maxlength="25"
       />
     </section>
     <section class="form__description">
@@ -56,6 +57,7 @@
         placeholder="Write your description here..."
         @input="adjustSize($event.target)"
         v-model="description"
+        maxlength="600"
       />
     </section>
     <section class="form__category">
@@ -282,12 +284,17 @@ export default defineComponent({
   &__input {
     background-color: transparent;
     border: none;
+    font-family: inherit;
     font-weight: 600;
     font-size: 24px;
     line-height: 135%;
     width: 100%;
     color: $lightgrey;
     letter-spacing: 0.05em;
+  }
+  &__input--title {
+    resize: none;
+    height: 50px;
   }
   &__input::placeholder {
     color: $blue1;
