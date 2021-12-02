@@ -236,7 +236,7 @@ export default defineComponent({
         this.$router.push("/");
       }, 2000);
     },
-    onEdit() {
+    generateFormData() {
       const date = new Date(this.date).toISOString();
 
       const newDream = new FormData();
@@ -249,6 +249,11 @@ export default defineComponent({
       if (this.image.isAdded) {
         newDream.append("image", this.image);
       }
+
+      return newDream;
+    },
+    onEdit() {
+      const newDream = this.generateFormData();
 
       const dreamToUpdate = {
         formData: newDream,
@@ -262,18 +267,8 @@ export default defineComponent({
       }, 2000);
     },
     onSubmit() {
-      const date = new Date(this.date).toISOString();
+      const newDream = this.generateFormData();
 
-      const newDream = new FormData();
-
-      newDream.append("title", this.title);
-      newDream.append("description", this.description);
-      newDream.append("mood", this.mood);
-      newDream.append("type", this.category);
-      newDream.append("date", date);
-      if (this.image.isAdded) {
-        newDream.append("image", this.image);
-      }
       this.addDream(newDream);
       this.isSaving = true;
       setTimeout(() => {
