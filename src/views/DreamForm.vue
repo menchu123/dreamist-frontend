@@ -1,5 +1,5 @@
 <template>
-  <section v-if="isLoading" class="loading-form">
+  <section v-if="isSaving || isLoading" class="loading-form">
     <div class="lds-ripple">
       <div></div>
       <div></div>
@@ -58,6 +58,7 @@
         @input="adjustSize($event.target)"
         v-model="description"
         maxlength="600"
+        ref="textarea"
       />
     </section>
     <section class="form__category">
@@ -140,7 +141,11 @@
     <section class="form__attachments">
       <p class="form__label form__label--attachments">Attachments</p>
       <div
-        :class="previewImage === null ? '' : 'form__attachment-button--hidden'"
+        :class="
+          previewImage === null || previewImage === undefined
+            ? ''
+            : 'form__attachment-button--hidden'
+        "
         class="form__attachment-button"
       >
         <label for="file" class="form__file-label"
@@ -156,7 +161,7 @@
         />
       </div>
       <div
-        v-if="previewImage !== null"
+        v-if="previewImage !== null && previewImage !== undefined"
         class="imagePreviewWrapper"
         :style="{ 'background-image': `url(${previewImage})` }"
         @click="removeFile()"
@@ -169,6 +174,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "vuex";
+import { useRoute } from "vue-router";
 import { Image } from "@/types/interfaces";
 
 export default defineComponent({
@@ -182,14 +188,15 @@ export default defineComponent({
       category: "normal",
       previewImage: null,
       image: {} as Image,
-      isLoading: false,
+      isSaving: false,
+      isDetail: false,
     };
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["user", "currentDream", "isLoading"]),
   },
   methods: {
-    ...mapActions(["addDream", "checkToken"]),
+    ...mapActions(["addDream", "checkToken", "getCurrentDream"]),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     adjustSize(textarea: any) {
       textarea.style.height = "auto";
@@ -215,7 +222,9 @@ export default defineComponent({
     },
     onSubmit() {
       const date = new Date(this.date).toISOString();
+
       const newDream = new FormData();
+
       newDream.append("title", this.title);
       newDream.append("description", this.description);
       newDream.append("mood", this.mood);
@@ -225,9 +234,9 @@ export default defineComponent({
         newDream.append("image", this.image);
       }
       this.addDream(newDream);
-      this.isLoading = true;
+      this.isSaving = true;
       setTimeout(() => {
-        this.isLoading = false;
+        this.isSaving = false;
         this.$router.push("/");
       }, 2000);
     },
@@ -236,10 +245,39 @@ export default defineComponent({
         this.$router.push("/login");
       }
     },
+    populateForm() {
+      this.isDetail = true;
+
+      this.title = this.currentDream.title;
+      this.description = this.currentDream.description;
+      this.category = this.currentDream.type;
+      this.mood = this.currentDream.mood;
+      [this.date] = this.currentDream.date.split("T");
+      if (this.image) {
+        this.image = this.currentDream.image;
+        this.previewImage = this.currentDream.image;
+      } else {
+        this.previewImage = null;
+      }
+
+      const description: HTMLElement = this.$refs.textarea as HTMLElement;
+      this.$nextTick(() => {
+        description.setAttribute(
+          "style",
+          `height:${description.scrollHeight}px;overflow-y:hidden;`
+        );
+      });
+    },
   },
-  mounted() {
+  async mounted() {
     this.checkToken();
     this.redirectToLogin();
+    const route = useRoute();
+    const { id } = route.params;
+    if (id) {
+      await this.getCurrentDream(id);
+      this.populateForm();
+    }
   },
 });
 </script>
@@ -317,7 +355,7 @@ export default defineComponent({
     font-family: inherit;
     overflow: hidden;
     resize: none;
-    height: auto;
+    height: min-content;
   }
   &__input:focus-visible {
     outline: none;
