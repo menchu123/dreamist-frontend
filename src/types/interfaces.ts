@@ -7,6 +7,11 @@ interface Dream {
   mood: string;
 }
 
+interface DreamToUpdate {
+  formData: Dream;
+  id: string;
+}
+
 interface User {
   userName: string;
   userId: string;
@@ -30,4 +35,4 @@ interface Image extends File {
   isAdded?: boolean;
 }
 
-export { State, Dream, User, UserLoginData, Image };
+export { State, Dream, User, UserLoginData, Image, DreamToUpdate };
