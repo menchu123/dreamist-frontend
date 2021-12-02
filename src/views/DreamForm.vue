@@ -1,4 +1,10 @@
 <template>
+  <section v-if="isLoading" class="loading-form">
+    <div class="lds-ripple">
+      <div></div>
+      <div></div>
+    </div>
+  </section>
   <form class="form" autocomplete="off" novalidate @submit.prevent="onSubmit">
     <div class="form__top-nav">
       <router-link to="/">
@@ -174,6 +180,7 @@ export default defineComponent({
       category: "normal",
       previewImage: null,
       image: {} as Image,
+      isLoading: false,
     };
   },
   methods: {
@@ -213,6 +220,11 @@ export default defineComponent({
         newDream.append("image", this.image);
       }
       this.addDream(newDream);
+      this.isLoading = true;
+      setTimeout(() => {
+        this.isLoading = false;
+        this.$router.push("/");
+      }, 2000);
     },
   },
 });
@@ -223,6 +235,17 @@ export default defineComponent({
 @import "./src/styles/mixins";
 .footer {
   height: 20px;
+}
+.loading-form {
+  @include loading;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(3, 17, 56, 0.6);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .imagePreviewWrapper {
   width: 100%;
