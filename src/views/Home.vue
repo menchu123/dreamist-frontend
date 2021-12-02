@@ -14,7 +14,9 @@
     </section>
     <ul v-else class="dream-list">
       <li class="dream-list__dream" v-for="dream in dreams" :key="dream.id">
-        <DreamPreview :dream="dream" />
+        <router-link :to="/dream-form/ + dream.id">
+          <DreamPreview :dream="dream" />
+        </router-link>
       </li>
     </ul>
     <NavBar />

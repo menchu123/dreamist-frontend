@@ -16,6 +16,11 @@ const routes: Array<RouteRecordRaw> = [
     component: DreamForm,
   },
   {
+    path: "/dream-form/:id",
+    name: "DreamDetail",
+    component: DreamForm,
+  },
+  {
     path: "/login",
     name: "Login",
     component: Login,
