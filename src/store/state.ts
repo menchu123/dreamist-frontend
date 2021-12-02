@@ -7,6 +7,14 @@ const state = {
       userId: "",
     },
   },
+  currentDream: {
+    id: "",
+    title: "",
+    description: "",
+    date: "",
+    type: "",
+    mood: "",
+  },
   isLoading: false,
 };
 
