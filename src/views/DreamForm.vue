@@ -155,6 +155,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapActions } from "vuex";
+import { Image } from "@/types/interfaces";
 
 export default defineComponent({
   name: "DreamForm",
@@ -166,7 +167,7 @@ export default defineComponent({
       mood: "1",
       category: "normal",
       previewImage: null,
-      image: {} as File,
+      image: {} as Image,
     };
   },
   methods: {
@@ -181,19 +182,18 @@ export default defineComponent({
       const file = input.files;
       if (file && file[0]) {
         [this.image] = file;
+        this.image.isAdded = true;
         const reader = new FileReader();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         reader.onload = (event: any) => {
           this.previewImage = event.target.result;
         };
         reader.readAsDataURL(file[0]);
-        this.$emit("input", file[0]);
       }
     },
     removeFile() {
       this.previewImage = null;
-      const input: HTMLInputElement = this.$refs.fileInput as HTMLInputElement;
-      input.files = null;
+      this.image.isAdded = false;
     },
     onSubmit() {
       const date = new Date(this.date).toISOString();
@@ -203,7 +203,7 @@ export default defineComponent({
       newDream.append("mood", this.mood);
       newDream.append("type", this.category);
       newDream.append("date", date);
-      if (this.image.name) {
+      if (this.image.isAdded) {
         newDream.append("image", this.image);
       }
       this.addDream(newDream);

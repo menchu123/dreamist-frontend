@@ -25,4 +25,8 @@ interface UserLoginData {
   password: string;
 }
 
-export { State, Dream, User, UserLoginData };
+interface Image extends File {
+  isAdded?: boolean;
+}
+
+export { State, Dream, User, UserLoginData, Image };
