@@ -48,6 +48,18 @@ const actions = {
       return "Error adding dream";
     }
   },
+  async deleteDream({ commit }: ActionContext<State, State>, id: string): Promise<void> {
+    commit("startLoading");
+    const { token } = JSON.parse(localStorage.getItem("token") || "");
+    await axios.delete(`${process.env.VUE_APP_API_URL}/dreams/user-dreams/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    commit("deleteCurrentDream", id);
+    commit("stopLoading");
+  },
   async loginUser({ commit }: ActionContext<State, State>, user: User): Promise<void> {
     const { data } = await axios.post(`${process.env.VUE_APP_API_URL}/users/login`, user);
     const { token } = data;
