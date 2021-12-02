@@ -17,7 +17,7 @@ describe("Given a SignUp component", () => {
         global: {
           plugins: [router, store],
         },
-        stubs: ["router-link", "router-view", "FontAwesomeIcon"],
+        stubs: ["router-link", "router-view"],
       });
 
       expect(wrapper.html()).toContain('<section class="signup">');

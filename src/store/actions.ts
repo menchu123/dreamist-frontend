@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { ActionContext } from "vuex";
-import { State, User } from "@/types/interfaces";
+import { State, User, Dream } from "@/types/interfaces";
 
 const actions = {
   async getDreamsFromApi({ commit }: ActionContext<State, State>): Promise<void | string> {
@@ -17,6 +17,23 @@ const actions = {
       commit("stopLoading");
     } catch {
       return "Error fetching dreams";
+    }
+  },
+  async addDream({ commit }: ActionContext<State, State>, dream: Dream): Promise<void | string> {
+    try {
+      const { token } = JSON.parse(localStorage.getItem("token") || "");
+      const { data: newDream } = await axios.post(
+        `${process.env.VUE_APP_API_URL}/dreams/user-dreams/new`,
+        dream,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      commit("addDream", newDream);
+    } catch (error) {
+      return "Error adding dream";
     }
   },
   async loginUser({ commit }: ActionContext<State, State>, user: User): Promise<void> {

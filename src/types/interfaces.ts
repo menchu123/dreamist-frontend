@@ -1,9 +1,8 @@
 interface Dream {
-  _id: string;
+  id: string;
   title: string;
   description: string;
   date: string;
-  image: string;
   type: string;
   mood: string;
 }
@@ -26,4 +25,8 @@ interface UserLoginData {
   password: string;
 }
 
-export { State, Dream, User, UserLoginData };
+interface Image extends File {
+  isAdded?: boolean;
+}
+
+export { State, Dream, User, UserLoginData, Image };

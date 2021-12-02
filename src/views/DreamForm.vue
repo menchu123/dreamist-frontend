@@ -1,12 +1,24 @@
 <template>
-  <form class="form" autocomplete="off" novalidate @submit.prevent>
+  <section v-if="isLoading" class="loading-form">
+    <div class="lds-ripple">
+      <div></div>
+      <div></div>
+    </div>
+  </section>
+  <form class="form" autocomplete="off" novalidate @submit.prevent="onSubmit">
     <div class="form__top-nav">
       <router-link to="/">
         <div class="form__back">
           <font-awesome-icon icon="angle-left"></font-awesome-icon>
         </div>
       </router-link>
-      <button class="form__save">Save</button>
+      <button
+        class="form__save"
+        type="submit"
+        :disabled="title.length < 3 || description.length < 3"
+      >
+        Save
+      </button>
     </div>
     <section class="form__time">
       <div class="form__time">
@@ -32,6 +44,7 @@
         name="title"
         id="title"
         placeholder="Write your title here..."
+        v-model="title"
       />
     </section>
     <section class="form__description">
@@ -42,13 +55,21 @@
         id="description"
         placeholder="Write your description here..."
         @input="adjustSize($event.target)"
+        v-model="description"
       />
     </section>
     <section class="form__category">
       <p class="form__label form__label--category">How do we categorize your dream?</p>
       <div class="form__category-buttons">
         <div class="form__category-button">
-          <input type="radio" id="normal" name="category" value="normal" checked />
+          <input
+            type="radio"
+            id="normal"
+            name="category"
+            value="normal"
+            checked
+            v-model="category"
+          />
           <label
             for="normal"
             class="form__category-button-label form__category-button-label--normal"
@@ -56,13 +77,13 @@
           >
         </div>
         <div class="form__category-button">
-          <input type="radio" id="lucid" name="category" value="lucid" />
+          <input type="radio" id="lucid" name="category" value="lucid" v-model="category" />
           <label for="lucid" class="form__category-button-label form__category-button-label--lucid"
             >LUCID</label
           >
         </div>
         <div class="form__category-button">
-          <input type="radio" id="nightmare" name="category" value="nightmare" />
+          <input type="radio" id="nightmare" name="category" value="nightmare" v-model="category" />
           <label
             for="nightmare"
             class="form__category-button-label form__category-button-label--nightmare"
@@ -70,7 +91,7 @@
           >
         </div>
         <div class="form__category-button">
-          <input type="radio" id="daydream" name="category" value="daydream" />
+          <input type="radio" id="daydream" name="category" value="daydream" v-model="category" />
           <label
             for="daydream"
             class="form__category-button-label form__category-button-label--daydream"
@@ -83,31 +104,31 @@
       <p class="form__label form__label--mood">How did you feel when you woke up?</p>
       <div class="form__mood-buttons">
         <div class="form__mood-button">
-          <input type="radio" id="1" name="mood" value="1" checked />
+          <input type="radio" id="1" name="mood" value="1" checked v-model="mood" />
           <label for="1" class="form__mood-button-label form__mood-button-label--1"
             ><font-awesome-icon icon="grin"></font-awesome-icon
           ></label>
         </div>
         <div class="form__mood-button">
-          <input type="radio" id="2" name="mood" value="2" />
+          <input type="radio" id="2" name="mood" value="2" v-model="mood" />
           <label for="2" class="form__mood-button-label form__mood-button-label--2"
             ><font-awesome-icon icon="smile"></font-awesome-icon
           ></label>
         </div>
         <div class="form__mood-button">
-          <input type="radio" id="3" name="mood" value="3" />
+          <input type="radio" id="3" name="mood" value="3" v-model="mood" />
           <label for="3" class="form__mood-button-label form__mood-button-label--3"
             ><font-awesome-icon icon="meh"></font-awesome-icon
           ></label>
         </div>
         <div class="form__mood-button">
-          <input type="radio" id="4" name="mood" value="4" />
+          <input type="radio" id="4" name="mood" value="4" v-model="mood" />
           <label for="4" class="form__mood-button-label form__mood-button-label--4"
             ><font-awesome-icon icon="frown"></font-awesome-icon
           ></label>
         </div>
         <div class="form__mood-button">
-          <input type="radio" id="5" name="mood" value="5" />
+          <input type="radio" id="5" name="mood" value="5" v-model="mood" />
           <label for="5" class="form__mood-button-label form__mood-button-label--5"
             ><font-awesome-icon icon="grimace"></font-awesome-icon
           ></label>
@@ -145,16 +166,25 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { mapActions } from "vuex";
+import { Image } from "@/types/interfaces";
 
 export default defineComponent({
   name: "DreamForm",
   data() {
     return {
       date: new Date().toISOString().split("T")[0],
+      title: "",
+      description: "",
+      mood: "1",
+      category: "normal",
       previewImage: null,
+      image: {} as Image,
+      isLoading: false,
     };
   },
   methods: {
+    ...mapActions(["addDream"]),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     adjustSize(textarea: any) {
       textarea.style.height = "auto";
@@ -164,19 +194,37 @@ export default defineComponent({
       const input: HTMLInputElement = this.$refs.fileInput as HTMLInputElement;
       const file = input.files;
       if (file && file[0]) {
+        [this.image] = file;
+        this.image.isAdded = true;
         const reader = new FileReader();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         reader.onload = (event: any) => {
           this.previewImage = event.target.result;
         };
         reader.readAsDataURL(file[0]);
-        this.$emit("input", file[0]);
       }
     },
     removeFile() {
       this.previewImage = null;
-      const input: HTMLInputElement = this.$refs.fileInput as HTMLInputElement;
-      input.files = null;
+      this.image.isAdded = false;
+    },
+    onSubmit() {
+      const date = new Date(this.date).toISOString();
+      const newDream = new FormData();
+      newDream.append("title", this.title);
+      newDream.append("description", this.description);
+      newDream.append("mood", this.mood);
+      newDream.append("type", this.category);
+      newDream.append("date", date);
+      if (this.image.isAdded) {
+        newDream.append("image", this.image);
+      }
+      this.addDream(newDream);
+      this.isLoading = true;
+      setTimeout(() => {
+        this.isLoading = false;
+        this.$router.push("/");
+      }, 2000);
     },
   },
 });
@@ -187,6 +235,17 @@ export default defineComponent({
 @import "./src/styles/mixins";
 .footer {
   height: 20px;
+}
+.loading-form {
+  @include loading;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(3, 17, 56, 0.6);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .imagePreviewWrapper {
   width: 100%;
@@ -334,6 +393,9 @@ export default defineComponent({
   }
   &__save {
     @include button;
+  }
+  &__save:disabled {
+    background-color: $pink3;
   }
   &__moon {
     margin-right: 10px;
