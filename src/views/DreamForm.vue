@@ -168,7 +168,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import { Image } from "@/types/interfaces";
 
 export default defineComponent({
@@ -185,8 +185,11 @@ export default defineComponent({
       isLoading: false,
     };
   },
+  computed: {
+    ...mapState(["user"]),
+  },
   methods: {
-    ...mapActions(["addDream"]),
+    ...mapActions(["addDream", "checkToken"]),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     adjustSize(textarea: any) {
       textarea.style.height = "auto";
@@ -228,6 +231,15 @@ export default defineComponent({
         this.$router.push("/");
       }, 2000);
     },
+    redirectToLogin() {
+      if (!this.user.isAuthenticated) {
+        this.$router.push("/login");
+      }
+    },
+  },
+  mounted() {
+    this.checkToken();
+    this.redirectToLogin();
   },
 });
 </script>
