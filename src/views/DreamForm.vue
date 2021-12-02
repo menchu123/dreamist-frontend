@@ -13,6 +13,7 @@
         </div>
       </router-link>
       <button
+        v-if="!isDetail"
         class="form__save"
         type="submit"
         :disabled="title.length < 3 || description.length < 3"
@@ -167,7 +168,7 @@
         @click="removeFile()"
       ></div>
     </section>
-    <button class="delete-button">Delete dream</button>
+    <button v-if="isDetail" class="delete-button" @click.prevent="onDelete">Delete dream</button>
     <section class="footer"></section>
   </form>
 </template>
@@ -197,7 +198,7 @@ export default defineComponent({
     ...mapState(["user", "currentDream", "isLoading"]),
   },
   methods: {
-    ...mapActions(["addDream", "checkToken", "getCurrentDream"]),
+    ...mapActions(["addDream", "checkToken", "getCurrentDream", "deleteDream"]),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     adjustSize(textarea: any) {
       textarea.style.height = "auto";
@@ -220,6 +221,15 @@ export default defineComponent({
     removeFile() {
       this.previewImage = null;
       this.image.isAdded = false;
+    },
+    onDelete() {
+      console.log("borrando");
+      this.deleteDream(this.currentDream.id);
+      this.isSaving = true;
+      setTimeout(() => {
+        this.isSaving = false;
+        this.$router.push("/");
+      }, 2000);
     },
     onSubmit() {
       const date = new Date(this.date).toISOString();
@@ -297,6 +307,10 @@ export default defineComponent({
   border-radius: 15px;
   border: none;
   margin-top: 40px;
+}
+.delete-button:active {
+  background-color: lightcoral;
+  color: pink;
 }
 .loading-form {
   @include loading;
