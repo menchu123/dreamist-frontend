@@ -167,6 +167,7 @@
         @click="removeFile()"
       ></div>
     </section>
+    <button class="delete-button">Delete dream</button>
     <section class="footer"></section>
   </form>
 </template>
@@ -286,7 +287,16 @@ export default defineComponent({
 @import "./src/styles/variables";
 @import "./src/styles/mixins";
 .footer {
-  height: 20px;
+  height: 50px;
+}
+.delete-button {
+  color: lightcoral;
+  font-size: 16px;
+  background-color: darkred;
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: none;
+  margin-top: 40px;
 }
 .loading-form {
   @include loading;
