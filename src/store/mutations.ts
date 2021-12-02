@@ -23,6 +23,16 @@ const mutations = {
   deleteCurrentDream(state: State, payload: string): void {
     state.dreams = state.dreams.filter((dream: Dream) => dream.id !== payload);
   },
+  updateDream(state: State, payload: Dream): void {
+    state.dreams = state.dreams.map((dream) =>
+      dream.id === payload.id
+        ? {
+            ...dream,
+            ...payload,
+          }
+        : dream
+    );
+  },
 };
 
 export default mutations;
