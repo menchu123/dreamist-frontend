@@ -5,7 +5,12 @@
       <div></div>
     </div>
   </section>
-  <form class="form" autocomplete="off" novalidate @submit.prevent="onSubmit">
+  <form
+    class="form"
+    autocomplete="off"
+    novalidate
+    @submit.prevent="isDetail ? onEdit() : onSubmit()"
+  >
     <div class="form__top-nav">
       <router-link to="/">
         <div class="form__back">
@@ -13,12 +18,11 @@
         </div>
       </router-link>
       <button
-        v-if="!isDetail"
         class="form__save"
         type="submit"
         :disabled="title.length < 3 || description.length < 3"
       >
-        Save
+        {{ isDetail ? "Edit" : "Save" }}
       </button>
     </div>
     <section class="form__time">
@@ -198,7 +202,7 @@ export default defineComponent({
     ...mapState(["user", "currentDream", "isLoading"]),
   },
   methods: {
-    ...mapActions(["addDream", "checkToken", "getCurrentDream", "deleteDream"]),
+    ...mapActions(["addDream", "checkToken", "getCurrentDream", "deleteDream", "updateDream"]),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     adjustSize(textarea: any) {
       textarea.style.height = "auto";
@@ -220,11 +224,37 @@ export default defineComponent({
     },
     removeFile() {
       this.previewImage = null;
-      this.image.isAdded = false;
+      if (typeof this.image !== "string") {
+        this.image.isAdded = false;
+      }
     },
     onDelete() {
-      console.log("borrando");
       this.deleteDream(this.currentDream.id);
+      this.isSaving = true;
+      setTimeout(() => {
+        this.isSaving = false;
+        this.$router.push("/");
+      }, 2000);
+    },
+    onEdit() {
+      const date = new Date(this.date).toISOString();
+
+      const newDream = new FormData();
+
+      newDream.append("title", this.title);
+      newDream.append("description", this.description);
+      newDream.append("mood", this.mood);
+      newDream.append("type", this.category);
+      newDream.append("date", date);
+      if (this.image.isAdded) {
+        newDream.append("image", this.image);
+      }
+
+      const dreamToUpdate = {
+        formData: newDream,
+        id: this.currentDream.id,
+      };
+      this.updateDream(dreamToUpdate);
       this.isSaving = true;
       setTimeout(() => {
         this.isSaving = false;
