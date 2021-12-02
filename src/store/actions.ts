@@ -19,6 +19,18 @@ const actions = {
       return "Error fetching dreams";
     }
   },
+  async getCurrentDream({ commit }: ActionContext<State, State>, id: string): Promise<void> {
+    commit("startLoading");
+    const { token } = JSON.parse(localStorage.getItem("token") || "");
+    const { data } = await axios.get(`${process.env.VUE_APP_API_URL}/dreams/user-dreams/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    commit("loadCurrentDream", data);
+    commit("stopLoading");
+  },
   async addDream({ commit }: ActionContext<State, State>, dream: Dream): Promise<void | string> {
     try {
       const { token } = JSON.parse(localStorage.getItem("token") || "");
