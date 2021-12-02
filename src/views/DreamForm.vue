@@ -6,7 +6,13 @@
           <font-awesome-icon icon="angle-left"></font-awesome-icon>
         </div>
       </router-link>
-      <button class="form__save" type="submit">Save</button>
+      <button
+        class="form__save"
+        type="submit"
+        :disabled="title.length < 3 || description.length < 3"
+      >
+        Save
+      </button>
     </div>
     <section class="form__time">
       <div class="form__time">
@@ -364,6 +370,9 @@ export default defineComponent({
   }
   &__save {
     @include button;
+  }
+  &__save:disabled {
+    background-color: $pink3;
   }
   &__moon {
     margin-right: 10px;
