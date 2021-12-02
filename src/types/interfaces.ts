@@ -19,6 +19,7 @@ interface State {
     user: User;
   };
   isLoading: boolean;
+  currentDream: Dream;
 }
 interface UserLoginData {
   username: string;
