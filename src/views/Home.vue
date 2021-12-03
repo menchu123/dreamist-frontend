@@ -5,11 +5,7 @@
       class="sign-out"
       icon="sign-out-alt"
     ></font-awesome-icon>
-    <section class="moon">
-      <transition name="moonrise" mode="out-in">
-        <img v-if="enter" src="@/assets/luna.png" alt="moon" class="moon-image" />
-      </transition>
-    </section>
+    <Moon />
     <h1 @click="enter = !enter" class="title">Journal</h1>
     <section v-if="isLoading" class="loading">
       <div class="lds-ripple">
@@ -38,12 +34,14 @@ import { defineComponent } from "vue";
 import { mapState, mapActions } from "vuex";
 import NavBar from "@/components/NavBar.vue";
 import DreamPreview from "@/components/DreamPreview.vue";
+import Moon from "@/components/Moon.vue";
 
 export default defineComponent({
   name: "Home",
   components: {
     NavBar,
     DreamPreview,
+    Moon,
   },
   data() {
     return {
@@ -83,9 +81,6 @@ export default defineComponent({
 <style lang="scss">
 @import "./src/styles/variables";
 @import "./src/styles/mixins";
-.moon {
-  @include moon-transition;
-}
 
 .sign-out {
   position: absolute;

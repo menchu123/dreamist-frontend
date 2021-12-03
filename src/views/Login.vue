@@ -1,5 +1,6 @@
 <template>
   <section class="login">
+    <Moon />
     <h1 class="login__title">Welcome back!</h1>
     <form class="login__form" novalidate autocomplete="off" @submit.prevent="onSubmit">
       <input
@@ -39,9 +40,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "vuex";
+import Moon from "@/components/Moon.vue";
 
 export default defineComponent({
   name: "Login",
+  components: {
+    Moon,
+  },
   data() {
     return {
       username: "",
