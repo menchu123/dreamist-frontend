@@ -1,5 +1,6 @@
 <template>
   <section class="signup">
+    <Moon />
     <h1 class="signup__title">Create your account</h1>
     <form action="" class="signup__form" novalidate autocomplete="off" @submit.prevent="onSubmit">
       <input type="text" name="name" id="name" placeholder="Name" v-model="name" maxlength="30" />
@@ -42,9 +43,13 @@
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "vuex";
 import axios from "axios";
+import Moon from "@/components/Moon.vue";
 
 export default defineComponent({
   name: "SignUp",
+  components: {
+    Moon,
+  },
   data() {
     return {
       name: "",

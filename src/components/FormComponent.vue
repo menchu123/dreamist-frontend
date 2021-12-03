@@ -22,7 +22,7 @@
         type="submit"
         :disabled="title.length < 3 || description.length < 3"
       >
-        {{ isDetail ? "Edit" : "Save" }}
+        Save
       </button>
     </div>
     <section class="form__time">
@@ -169,8 +169,11 @@
         v-if="previewImage !== null && previewImage !== undefined"
         class="imagePreviewWrapper"
         :style="{ 'background-image': `url(${previewImage})` }"
-        @click="removeFile()"
-      ></div>
+      >
+        <button @click="removeFile()" class="delete-image-button">
+          <font-awesome-icon icon="trash-alt"></font-awesome-icon>
+        </button>
+      </div>
     </section>
     <button v-if="isDetail" class="delete-button" @click.prevent="onDelete">Delete dream</button>
     <section class="footer"></section>
@@ -337,6 +340,21 @@ export default defineComponent({
   background-color: lightcoral;
   color: pink;
 }
+.delete-image-button {
+  color: lightcoral;
+  background-color: darkred;
+  font-size: 20px;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  &:active {
+    background-color: lightcoral;
+    color: pink;
+  }
+}
 .loading-form {
   @include loading;
   position: fixed;
@@ -357,6 +375,7 @@ export default defineComponent({
   margin-bottom: 10px;
   background-size: cover;
   background-position: center center;
+  position: relative;
 }
 .form {
   min-height: 100vh;

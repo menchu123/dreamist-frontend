@@ -5,11 +5,7 @@
       class="sign-out"
       icon="sign-out-alt"
     ></font-awesome-icon>
-    <section class="moon">
-      <transition name="moonrise" mode="out-in">
-        <img v-if="enter" src="@/assets/luna.png" alt="moon" class="moon-image" />
-      </transition>
-    </section>
+    <Moon />
     <h1 @click="enter = !enter" class="title">Journal</h1>
     <section v-if="isLoading" class="loading">
       <div class="lds-ripple">
@@ -23,7 +19,7 @@
       >
     </section>
     <ul v-else class="dream-list">
-      <li class="dream-list__dream" v-for="dream in dreams" :key="dream.id">
+      <li class="dream-list__dream" v-for="dream in sortDreams" :key="dream.id">
         <router-link :to="/dream-form/ + dream.id">
           <DreamPreview :dream="dream" />
         </router-link>
@@ -35,15 +31,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import NavBar from "@/components/NavBar.vue";
 import DreamPreview from "@/components/DreamPreview.vue";
+import Moon from "@/components/Moon.vue";
 
 export default defineComponent({
   name: "Home",
   components: {
     NavBar,
     DreamPreview,
+    Moon,
   },
   data() {
     return {
@@ -52,6 +50,7 @@ export default defineComponent({
   },
   computed: {
     ...mapState(["dreams", "user", "isLoading"]),
+    ...mapGetters(["sortDreams"]),
   },
   methods: {
     ...mapActions(["getDreamsFromApi", "checkToken", "logoutUser"]),
@@ -83,13 +82,10 @@ export default defineComponent({
 <style lang="scss">
 @import "./src/styles/variables";
 @import "./src/styles/mixins";
-.moon {
-  @include moon-transition;
-}
 
 .sign-out {
   position: absolute;
-  right: calc(50% - (($content-width - 30px) / 2));
+  right: calc(50% - (($content-width - 60px) / 2));
   top: 60px;
   font-size: 20px;
   color: $lightgrey;
