@@ -19,7 +19,7 @@
       >
     </section>
     <ul v-else class="dream-list">
-      <li class="dream-list__dream" v-for="dream in dreams" :key="dream.id">
+      <li class="dream-list__dream" v-for="dream in sortDreams" :key="dream.id">
         <router-link :to="/dream-form/ + dream.id">
           <DreamPreview :dream="dream" />
         </router-link>
@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import NavBar from "@/components/NavBar.vue";
 import DreamPreview from "@/components/DreamPreview.vue";
 import Moon from "@/components/Moon.vue";
@@ -50,6 +50,7 @@ export default defineComponent({
   },
   computed: {
     ...mapState(["dreams", "user", "isLoading"]),
+    ...mapGetters(["sortDreams"]),
   },
   methods: {
     ...mapActions(["getDreamsFromApi", "checkToken", "logoutUser"]),
