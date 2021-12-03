@@ -1,8 +1,10 @@
 <template>
   <section class="dream-prev">
-    <div class="dream-prev__date">{{ dreamDate() }}</div>
-    <div class="dream-prev__moon">
-      <font-awesome-icon icon="moon"></font-awesome-icon>
+    <div class="dream-prev__left">
+      <div class="dream-prev__date">{{ dreamDate() }}</div>
+      <div class="dream-prev__moon">
+        <font-awesome-icon icon="moon"></font-awesome-icon>
+      </div>
     </div>
     <div class="dream-prev__prev">
       <h2 class="dream-prev__title">{{ dream.title }}</h2>
@@ -45,7 +47,7 @@ export default defineComponent({
   background-color: $blue2;
   margin: 0 auto 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   max-width: $content-width;
@@ -60,11 +62,18 @@ export default defineComponent({
     height: 60px;
     overflow: hidden;
   }
+  &__left {
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
   &__date {
     font-size: 20px;
     line-height: 135%;
     text-align: right;
     width: 52px;
+    margin-bottom: 10px;
   }
   &__type {
     margin: 0 0 15px;
