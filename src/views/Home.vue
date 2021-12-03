@@ -5,7 +5,12 @@
       class="sign-out"
       icon="sign-out-alt"
     ></font-awesome-icon>
-    <h1 class="title">Journal</h1>
+    <section class="moon">
+      <transition name="moonrise" mode="out-in">
+        <img v-if="enter" src="@/assets/luna.png" alt="moon" class="moon-image" />
+      </transition>
+    </section>
+    <h1 @click="enter = !enter" class="title">Journal</h1>
     <section v-if="isLoading" class="loading">
       <div class="lds-ripple">
         <div></div>
@@ -40,6 +45,11 @@ export default defineComponent({
     NavBar,
     DreamPreview,
   },
+  data() {
+    return {
+      enter: false,
+    };
+  },
   computed: {
     ...mapState(["dreams", "user", "isLoading"]),
   },
@@ -65,6 +75,7 @@ export default defineComponent({
     this.checkToken();
     this.redirectToLogin();
     this.getDreamsFromApi();
+    this.enter = true;
   },
 });
 </script>
@@ -72,6 +83,10 @@ export default defineComponent({
 <style lang="scss">
 @import "./src/styles/variables";
 @import "./src/styles/mixins";
+.moon {
+  @include moon-transition;
+}
+
 .sign-out {
   position: absolute;
   right: calc(50% - (($content-width - 30px) / 2));

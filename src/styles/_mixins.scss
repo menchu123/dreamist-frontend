@@ -170,3 +170,48 @@
     }
   }
 }
+
+@mixin moon-transition {
+  position: fixed;
+  width: 100vw;
+  height: 150px;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+.moon-image {
+  position: absolute;
+  left: calc(50% - (($content-width + 360px) / 2));
+  top: 150px;
+  offset-path: path("M -3 -1 C 165 -93 534 -93 720 3");
+  offset-rotate: 0deg;
+  offset-distance: 35%;
+}
+
+.moonrise-enter-active {
+  animation: move-in 1.2s;
+}
+.moonrise-leave-active {
+  animation: move-out 1.2s;
+}
+@keyframes move-in {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  100% {
+    offset-distance: 35%;
+    opacity: 1;
+  }
+}
+
+@keyframes move-out {
+  0% {
+    offset-distance: 35%;
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
