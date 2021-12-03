@@ -83,6 +83,14 @@ const actions = {
     localStorage.setItem("token", JSON.stringify({ token }));
     commit("loadUser", userInfo);
   },
+  async logoutUser({ commit }: ActionContext<State, State>): Promise<void> {
+    localStorage.removeItem("token");
+    const emptyUser = {
+      userName: "",
+      userId: "",
+    };
+    commit("emptyUser", emptyUser);
+  },
   checkToken({ commit }: ActionContext<State, State>): string | void {
     try {
       const token = JSON.parse(localStorage.getItem("token") || "");

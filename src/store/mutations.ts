@@ -11,6 +11,10 @@ const mutations = {
     state.user.user = payload;
     state.user.isAuthenticated = true;
   },
+  emptyUser(state: State, payload: User): void {
+    state.user.user = payload;
+    state.user.isAuthenticated = false;
+  },
   addDream(state: State, payload: Dream): void {
     state.dreams = [...state.dreams, payload];
   },

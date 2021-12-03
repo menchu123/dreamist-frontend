@@ -1,5 +1,10 @@
 <template>
   <div class="home">
+    <font-awesome-icon
+      @click.prevent="logout()"
+      class="sign-out"
+      icon="sign-out-alt"
+    ></font-awesome-icon>
     <h1 class="title">Journal</h1>
     <section v-if="isLoading" class="loading">
       <div class="lds-ripple">
@@ -39,7 +44,7 @@ export default defineComponent({
     ...mapState(["dreams", "user", "isLoading"]),
   },
   methods: {
-    ...mapActions(["getDreamsFromApi", "checkToken"]),
+    ...mapActions(["getDreamsFromApi", "checkToken", "logoutUser"]),
     redirectToLogin() {
       if (!this.user.isAuthenticated) {
         this.$router.push("/login");
@@ -50,6 +55,10 @@ export default defineComponent({
         return true;
       }
       return false;
+    },
+    logout() {
+      this.logoutUser();
+      this.$router.push("/login");
     },
   },
   mounted() {
@@ -63,6 +72,16 @@ export default defineComponent({
 <style lang="scss">
 @import "./src/styles/variables";
 @import "./src/styles/mixins";
+.sign-out {
+  position: absolute;
+  right: calc(50% - (($content-width - 30px) / 2));
+  top: 60px;
+  font-size: 20px;
+  color: $lightgrey;
+  &:active {
+    color: $blue1;
+  }
+}
 .no-dreams {
   font-size: 28px;
   text-align: center;
