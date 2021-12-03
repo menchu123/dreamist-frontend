@@ -89,7 +89,7 @@ export default defineComponent({
 
 .sign-out {
   position: absolute;
-  right: calc(50% - (($content-width - 30px) / 2));
+  right: calc(50% - (($content-width - 60px) / 2));
   top: 60px;
   font-size: 20px;
   color: $lightgrey;
