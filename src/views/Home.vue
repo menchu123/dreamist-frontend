@@ -92,6 +92,7 @@ export default defineComponent({
   &:active {
     color: $blue1;
   }
+  z-index: 2;
 }
 .no-dreams {
   font-size: 28px;
