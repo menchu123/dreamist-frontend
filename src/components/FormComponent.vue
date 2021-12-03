@@ -22,7 +22,7 @@
         type="submit"
         :disabled="title.length < 3 || description.length < 3"
       >
-        {{ isDetail ? "Edit" : "Save" }}
+        Save
       </button>
     </div>
     <section class="form__time">
