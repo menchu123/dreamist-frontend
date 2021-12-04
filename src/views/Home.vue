@@ -123,7 +123,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: calc(100vh - 110px - 150px);
+    height: calc(100vh - 110px - 130px);
     overflow-y: scroll;
     padding-bottom: 30px;
     -ms-overflow-style: none;
