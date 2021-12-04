@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import SignUp from "../views/SignUp.vue";
 import DreamForm from "../views/DreamForm.vue";
+import WorkInProgress from "../views/WorkInProgress.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/signup",
     name: "SignUp",
     component: SignUp,
+  },
+  {
+    path: "/statistics",
+    name: "WIP",
+    component: WorkInProgress,
   },
 ];
 

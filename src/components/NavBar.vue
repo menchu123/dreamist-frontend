@@ -6,7 +6,9 @@
     <router-link to="/dream-form" class="nav__add-dream-button"
       ><font-awesome-icon icon="plus"></font-awesome-icon
     ></router-link>
-    <font-awesome-icon class="nav__icon nav__icon-stats" icon="chart-pie"></font-awesome-icon>
+    <router-link to="/statistics">
+      <font-awesome-icon class="nav__icon nav__icon-stats" icon="chart-pie"></font-awesome-icon>
+    </router-link>
   </section>
 </template>
 
