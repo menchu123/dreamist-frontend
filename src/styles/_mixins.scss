@@ -172,7 +172,7 @@
 }
 
 @mixin moon-transition {
-  position: fixed;
+  position: absolute;
   width: 100vw;
   height: 150px;
   margin: 0;
@@ -182,7 +182,7 @@
 
 .moon-image {
   position: absolute;
-  left: calc(50% - (($content-width) / 2));
+  left: calc(50% - ((($content-width) - 50px) / 2));
   top: 50px;
 }
 
@@ -193,7 +193,7 @@
 @keyframes move-in {
   0% {
     top: 150px;
-    left: calc(50% - (($content-width) + 160px / 2));
+    left: calc(50% - ((($content-width) + 160px) / 2));
     opacity: 0;
   }
   100% {
