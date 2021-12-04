@@ -21,6 +21,7 @@
 <script lang="ts">
 /* eslint-disable vue/no-unused-components */
 import { defineComponent } from "vue";
+import { mapActions, mapState } from "vuex";
 import Home from "@/views/Home.vue";
 import DreamForm from "@/views/DreamForm.vue";
 
@@ -30,9 +31,9 @@ export default defineComponent({
     Home,
     DreamForm,
   },
-  data: () => ({
-    isMobile: false,
-  }),
+  computed: {
+    ...mapState(["isMobile"]),
+  },
 
   beforeUnmount() {
     if (typeof window !== "undefined") {
@@ -46,8 +47,11 @@ export default defineComponent({
   },
 
   methods: {
+    ...mapActions(["isMobileAction"]),
     onResize() {
-      this.isMobile = window.innerWidth < 768;
+      const isMobileNow = window.innerWidth < 768;
+      console.log(isMobileNow);
+      this.isMobileAction(isMobileNow);
     },
   },
 });
@@ -56,6 +60,12 @@ export default defineComponent({
 <style lang="scss" scoped>
 .news__container {
   display: flex;
+  @media only screen and (min-width: 768px) {
+    background-image: url("../assets/BackgroundBig.svg");
+    background-size: auto;
+    background-position-y: top;
+    background-repeat: repeat-x;
+  }
 }
 .left {
   flex: 1;

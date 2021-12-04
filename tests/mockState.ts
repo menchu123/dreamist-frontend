@@ -10,6 +10,7 @@ const stateMock = {
     },
   },
   isLoading: false,
+  isMobile: true,
 };
 
 export default stateMock as unknown as State;

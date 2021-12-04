@@ -8,6 +8,10 @@
   background-repeat: repeat-x;
   background-size: cover;
   background-attachment: fixed;
+  @media only screen and (min-width: 768px) {
+    background-image: url("../assets/BackgroundBig.svg");
+    background-size: auto;
+  }
 }
 
 @mixin backgroundGradient {
