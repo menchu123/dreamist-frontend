@@ -1,5 +1,5 @@
 <template>
-  <section v-if="isSaving || isLoading" class="loading-form">
+  <section v-if="(isSaving || isLoading) && isMobile" class="loading-form">
     <div class="lds-ripple">
       <div></div>
       <div></div>
@@ -11,7 +11,7 @@
     novalidate
     @submit.prevent="isDetail ? onEdit() : onSubmit()"
   >
-    <div class="form__top-nav">
+    <div v-if="isMobile" class="form__top-nav">
       <router-link to="/">
         <div class="form__back">
           <font-awesome-icon icon="angle-left"></font-awesome-icon>
@@ -25,158 +25,177 @@
         Save
       </button>
     </div>
-    <section class="form__time">
-      <div class="form__time">
-        <font-awesome-icon class="form__moon" icon="moon"></font-awesome-icon>
-        <span class="datepicker-toggle">
-          <span class="datepicker-toggle-button">{{
-            new Date(date).toLocaleString("en-US", {
-              weekday: "short",
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })
-          }}</span>
-          <input type="date" class="datepicker-input" v-model="date" />
-        </span>
-      </div>
-    </section>
-    <section class="form__title">
-      <label for="title" class="form__label form__label--title">Title</label>
-      <textarea
-        class="form__input form__input--title"
-        name="title"
-        id="title"
-        placeholder="Write your title here..."
-        v-model="title"
-        @input="adjustSize($event.target)"
-        maxlength="25"
-      />
-    </section>
-    <section class="form__description">
-      <label for="description" class="form__label form__label--description">Description</label>
-      <textarea
-        class="form__input form__input--description"
-        name="description"
-        id="description"
-        placeholder="Write your description here..."
-        @input="adjustSize($event.target)"
-        v-model="description"
-        maxlength="600"
-        ref="textarea"
-      />
-    </section>
-    <section class="form__category">
-      <p class="form__label form__label--category">How do we categorize your dream?</p>
-      <div class="form__category-buttons">
-        <div class="form__category-button">
-          <input
-            type="radio"
-            id="normal"
-            name="category"
-            value="normal"
-            checked
-            v-model="category"
-          />
-          <label
-            for="normal"
-            class="form__category-button-label form__category-button-label--normal"
-            >NORMAL</label
-          >
+    <div class="form-content">
+      <section class="form__time">
+        <div class="form__time">
+          <font-awesome-icon class="form__moon" icon="moon"></font-awesome-icon>
+          <span class="datepicker-toggle">
+            <span class="datepicker-toggle-button">{{
+              new Date(date).toLocaleString("en-US", {
+                weekday: "short",
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })
+            }}</span>
+            <input type="date" class="datepicker-input" v-model="date" />
+          </span>
         </div>
-        <div class="form__category-button">
-          <input type="radio" id="lucid" name="category" value="lucid" v-model="category" />
-          <label for="lucid" class="form__category-button-label form__category-button-label--lucid"
-            >LUCID</label
-          >
-        </div>
-        <div class="form__category-button">
-          <input type="radio" id="nightmare" name="category" value="nightmare" v-model="category" />
-          <label
-            for="nightmare"
-            class="form__category-button-label form__category-button-label--nightmare"
-            >NIGHTMARE</label
-          >
-        </div>
-        <div class="form__category-button">
-          <input type="radio" id="daydream" name="category" value="daydream" v-model="category" />
-          <label
-            for="daydream"
-            class="form__category-button-label form__category-button-label--daydream"
-            >DAYDREAM</label
-          >
-        </div>
-      </div>
-    </section>
-    <section class="form__mood">
-      <p class="form__label form__label--mood">How did you feel when you woke up?</p>
-      <div class="form__mood-buttons">
-        <div class="form__mood-button">
-          <input type="radio" id="1" name="mood" value="1" checked v-model="mood" />
-          <label for="1" class="form__mood-button-label form__mood-button-label--1"
-            ><font-awesome-icon icon="grin"></font-awesome-icon
-          ></label>
-        </div>
-        <div class="form__mood-button">
-          <input type="radio" id="2" name="mood" value="2" v-model="mood" />
-          <label for="2" class="form__mood-button-label form__mood-button-label--2"
-            ><font-awesome-icon icon="smile"></font-awesome-icon
-          ></label>
-        </div>
-        <div class="form__mood-button">
-          <input type="radio" id="3" name="mood" value="3" v-model="mood" />
-          <label for="3" class="form__mood-button-label form__mood-button-label--3"
-            ><font-awesome-icon icon="meh"></font-awesome-icon
-          ></label>
-        </div>
-        <div class="form__mood-button">
-          <input type="radio" id="4" name="mood" value="4" v-model="mood" />
-          <label for="4" class="form__mood-button-label form__mood-button-label--4"
-            ><font-awesome-icon icon="frown"></font-awesome-icon
-          ></label>
-        </div>
-        <div class="form__mood-button">
-          <input type="radio" id="5" name="mood" value="5" v-model="mood" />
-          <label for="5" class="form__mood-button-label form__mood-button-label--5"
-            ><font-awesome-icon icon="grimace"></font-awesome-icon
-          ></label>
-        </div>
-      </div>
-    </section>
-    <section class="form__attachments">
-      <p class="form__label form__label--attachments">Attachments</p>
-      <div
-        :class="
-          previewImage === null || previewImage === undefined
-            ? ''
-            : 'form__attachment-button--hidden'
-        "
-        class="form__attachment-button"
-      >
-        <label for="file" class="form__file-label"
-          ><font-awesome-icon icon="image"></font-awesome-icon
-        ></label>
-        <input
-          ref="fileInput"
-          @input="previewFile"
-          type="file"
-          name="file"
-          id="file"
-          class="form__file-input"
+      </section>
+      <section class="form__title">
+        <label for="title" class="form__label form__label--title">Title</label>
+        <textarea
+          class="form__input form__input--title"
+          name="title"
+          id="title"
+          placeholder="Write your title here..."
+          v-model="title"
+          @input="adjustSize($event.target)"
+          maxlength="25"
         />
-      </div>
-      <div
-        v-if="previewImage !== null && previewImage !== undefined"
-        class="imagePreviewWrapper"
-        :style="{ 'background-image': `url(${previewImage})` }"
-      >
-        <button @click="removeFile()" class="delete-image-button">
-          <font-awesome-icon icon="trash-alt"></font-awesome-icon>
+      </section>
+      <section class="form__description">
+        <label for="description" class="form__label form__label--description">Description</label>
+        <textarea
+          class="form__input form__input--description"
+          name="description"
+          id="description"
+          placeholder="Write your description here..."
+          @input="adjustSize($event.target)"
+          v-model="description"
+          maxlength="600"
+          ref="textarea"
+        />
+      </section>
+      <section class="form__category">
+        <p class="form__label form__label--category">How do we categorize your dream?</p>
+        <div class="form__category-buttons">
+          <div class="form__category-button">
+            <input
+              type="radio"
+              id="normal"
+              name="category"
+              value="normal"
+              checked
+              v-model="category"
+            />
+            <label
+              for="normal"
+              class="form__category-button-label form__category-button-label--normal"
+              >NORMAL</label
+            >
+          </div>
+          <div class="form__category-button">
+            <input type="radio" id="lucid" name="category" value="lucid" v-model="category" />
+            <label
+              for="lucid"
+              class="form__category-button-label form__category-button-label--lucid"
+              >LUCID</label
+            >
+          </div>
+          <div class="form__category-button">
+            <input
+              type="radio"
+              id="nightmare"
+              name="category"
+              value="nightmare"
+              v-model="category"
+            />
+            <label
+              for="nightmare"
+              class="form__category-button-label form__category-button-label--nightmare"
+              >NIGHTMARE</label
+            >
+          </div>
+          <div class="form__category-button">
+            <input type="radio" id="daydream" name="category" value="daydream" v-model="category" />
+            <label
+              for="daydream"
+              class="form__category-button-label form__category-button-label--daydream"
+              >DAYDREAM</label
+            >
+          </div>
+        </div>
+      </section>
+      <section class="form__mood">
+        <p class="form__label form__label--mood">How did you feel when you woke up?</p>
+        <div class="form__mood-buttons">
+          <div class="form__mood-button">
+            <input type="radio" id="1" name="mood" value="1" checked v-model="mood" />
+            <label for="1" class="form__mood-button-label form__mood-button-label--1"
+              ><font-awesome-icon icon="grin"></font-awesome-icon
+            ></label>
+          </div>
+          <div class="form__mood-button">
+            <input type="radio" id="2" name="mood" value="2" v-model="mood" />
+            <label for="2" class="form__mood-button-label form__mood-button-label--2"
+              ><font-awesome-icon icon="smile"></font-awesome-icon
+            ></label>
+          </div>
+          <div class="form__mood-button">
+            <input type="radio" id="3" name="mood" value="3" v-model="mood" />
+            <label for="3" class="form__mood-button-label form__mood-button-label--3"
+              ><font-awesome-icon icon="meh"></font-awesome-icon
+            ></label>
+          </div>
+          <div class="form__mood-button">
+            <input type="radio" id="4" name="mood" value="4" v-model="mood" />
+            <label for="4" class="form__mood-button-label form__mood-button-label--4"
+              ><font-awesome-icon icon="frown"></font-awesome-icon
+            ></label>
+          </div>
+          <div class="form__mood-button">
+            <input type="radio" id="5" name="mood" value="5" v-model="mood" />
+            <label for="5" class="form__mood-button-label form__mood-button-label--5"
+              ><font-awesome-icon icon="grimace"></font-awesome-icon
+            ></label>
+          </div>
+        </div>
+      </section>
+      <section class="form__attachments">
+        <p class="form__label form__label--attachments">Attachments</p>
+        <div
+          :class="
+            previewImage === null || previewImage === undefined
+              ? ''
+              : 'form__attachment-button--hidden'
+          "
+          class="form__attachment-button"
+        >
+          <label for="file" class="form__file-label"
+            ><font-awesome-icon icon="image"></font-awesome-icon
+          ></label>
+          <input
+            ref="fileInput"
+            @input="previewFile"
+            type="file"
+            name="file"
+            id="file"
+            class="form__file-input"
+          />
+        </div>
+        <div
+          v-if="previewImage !== null && previewImage !== undefined"
+          class="imagePreviewWrapper"
+          :style="{ 'background-image': `url(${previewImage})` }"
+        >
+          <button @click="removeFile()" class="delete-image-button">
+            <font-awesome-icon icon="trash-alt"></font-awesome-icon>
+          </button>
+        </div>
+      </section>
+      <button v-if="isDetail" class="delete-button" @click.prevent="onDelete">Delete dream</button>
+      <div v-if="!isMobile" class="form__top-nav">
+        <button
+          class="form__save"
+          type="submit"
+          :disabled="title.length < 3 || description.length < 3"
+        >
+          Save
         </button>
       </div>
-    </section>
-    <button v-if="isDetail" class="delete-button" @click.prevent="onDelete">Delete dream</button>
-    <section class="footer"></section>
+      <section class="footer"></section>
+    </div>
   </form>
 </template>
 
@@ -202,7 +221,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(["user", "currentDream", "isLoading"]),
+    ...mapState(["user", "currentDream", "isLoading", "isMobile"]),
   },
   methods: {
     ...mapActions(["addDream", "checkToken", "getCurrentDream", "deleteDream", "updateDream"]),
@@ -233,11 +252,15 @@ export default defineComponent({
     },
     onDelete() {
       this.deleteDream(this.currentDream.id);
-      this.isSaving = true;
-      setTimeout(() => {
-        this.isSaving = false;
+      if (this.isMobile) {
+        this.isSaving = true;
+        setTimeout(() => {
+          this.isSaving = false;
+          this.$router.push("/");
+        }, 2000);
+      } else {
         this.$router.push("/");
-      }, 2000);
+      }
     },
     generateFormData() {
       const date = new Date(this.date).toISOString();
@@ -263,21 +286,29 @@ export default defineComponent({
         id: this.currentDream.id,
       };
       this.updateDream(dreamToUpdate);
-      this.isSaving = true;
-      setTimeout(() => {
-        this.isSaving = false;
+      if (this.isMobile) {
+        this.isSaving = true;
+        setTimeout(() => {
+          this.isSaving = false;
+          this.$router.push("/");
+        }, 2000);
+      } else {
         this.$router.push("/");
-      }, 2000);
+      }
     },
     onSubmit() {
       const newDream = this.generateFormData();
 
       this.addDream(newDream);
-      this.isSaving = true;
-      setTimeout(() => {
-        this.isSaving = false;
+      if (this.isMobile) {
+        this.isSaving = true;
+        setTimeout(() => {
+          this.isSaving = false;
+          this.$router.push("/");
+        }, 2000);
+      } else {
         this.$router.push("/");
-      }, 2000);
+      }
     },
     redirectToLogin() {
       if (!this.user.isAuthenticated) {
@@ -301,10 +332,14 @@ export default defineComponent({
 
       const description: HTMLElement = this.$refs.textarea as HTMLElement;
       this.$nextTick(() => {
-        description.setAttribute(
-          "style",
-          `height:${description.scrollHeight}px;overflow-y:hidden;`
-        );
+        try {
+          description.setAttribute(
+            "style",
+            `height:${description.scrollHeight}px;overflow-y:hidden;`
+          );
+        } catch {
+          return "Description is null";
+        }
       });
     },
   },
@@ -326,6 +361,17 @@ export default defineComponent({
 @import "./src/styles/mixins";
 .footer {
   height: 50px;
+}
+.form-content {
+  @media only screen and (min-width: 768px) {
+    height: calc(100vh - 145px);
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 .delete-button {
   color: lightcoral;
@@ -384,6 +430,11 @@ export default defineComponent({
   max-width: $content-width;
   min-width: 280px;
   margin: 0 auto;
+  @media only screen and (min-width: 768px) {
+    max-width: $content-width + 100px;
+    margin-top: 100px;
+    height: 100%;
+  }
   &__top-nav {
     display: flex;
     align-items: flex-end;

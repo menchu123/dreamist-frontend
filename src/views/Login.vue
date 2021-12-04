@@ -1,7 +1,7 @@
 <template>
   <section class="login">
     <Moon />
-    <h1 class="login__title">Welcome back!</h1>
+    <h2 class="login__title">Welcome back!</h2>
     <form class="login__form" novalidate autocomplete="off" @submit.prevent="onSubmit">
       <span v-if="wrongCredentials" class="wrong-credentials"
         >Wrong credentials! Please try again</span

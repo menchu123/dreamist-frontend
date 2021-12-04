@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="dream-prev__prev">
-        <h2 class="dream-prev__title">{{ dream.title }}</h2>
+        <h3 class="dream-prev__title">{{ dream.title }}</h3>
         <p class="dream-prev__text">{{ dreamDescription() }}</p>
         <section class="dream-prev__type" :class="dream.type">{{ dreamType() }}</section>
       </div>
@@ -44,6 +44,7 @@ export default defineComponent({
 
 <style lang="scss">
 @import "./src/styles/variables";
+
 .dream-prev {
   background-color: $blue2;
   margin-bottom: 20px;
@@ -54,6 +55,8 @@ export default defineComponent({
   min-height: 126px;
   border-radius: 15px;
   padding-left: 10px;
+  border: 1px solid transparent;
+
   &__prev {
     width: 235px;
   }

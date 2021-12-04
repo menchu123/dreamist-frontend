@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="wip-message">Under construction</h1>
+    <h2 class="wip-message">Under construction</h2>
     <section class="wip">
       <img class="wip-image" src="@/assets/wip.svg" alt="" />
     </section>
@@ -29,7 +29,6 @@ export default defineComponent({
   text-align: center;
   font-weight: 700;
   margin-top: 60px;
-  margin-bottom: 20px;
 }
 .wip {
   overflow: hidden;
@@ -37,7 +36,9 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  @media only screen and (min-width: 768px) {
+    height: calc(100vh - 164px);
+  }
 }
 .wip-image {
   width: 100%;

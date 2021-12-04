@@ -16,6 +16,7 @@ const state = {
     mood: "",
   },
   isLoading: false,
+  isMobile: false,
 };
 
 export default state;

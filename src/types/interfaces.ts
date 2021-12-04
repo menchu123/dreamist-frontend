@@ -25,6 +25,7 @@ interface State {
   };
   isLoading: boolean;
   currentDream: Dream;
+  isMobile: boolean;
 }
 interface UserLoginData {
   username: string;
