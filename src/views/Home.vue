@@ -1,22 +1,25 @@
 <template>
   <div class="home">
     <font-awesome-icon
+      v-if="isMobile"
       @click.prevent="logout()"
       class="sign-out"
       icon="sign-out-alt"
     ></font-awesome-icon>
-    <Moon />
-    <h1 @click="enter = !enter" class="title">Journal</h1>
-    <section v-if="isLoading" class="loading">
+    <Moon v-if="isMobile" />
+    <h2 class="title">Journal</h2>
+    <section v-if="isLoading && isMobile" class="loading">
       <div class="lds-ripple">
         <div></div>
         <div></div>
       </div>
     </section>
-    <section v-else-if="noDreams()" class="no-dreams">
-      You have not yet logged any dreams<span class="no-dreams--small"
-        >When you are ready, tap below to record your first dream</span
-      >
+    <section v-if="noDreams() && !isLoading" class="no-dreams">
+      <h2>
+        You have not yet logged any dreams<span class="no-dreams--small"
+          >When you are ready, tap below to record your first dream</span
+        >
+      </h2>
     </section>
     <ul v-else class="dream-list">
       <li class="dream-list__dream" v-for="dream in sortDreams" :key="dream.id">
@@ -47,7 +50,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(["dreams", "user", "isLoading"]),
+    ...mapState(["dreams", "user", "isLoading", "isMobile"]),
     ...mapGetters(["sortDreams"]),
   },
   methods: {
@@ -97,6 +100,12 @@ export default defineComponent({
   text-align: center;
   font-weight: 700;
   margin-top: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  h2 {
+    width: $content-width;
+  }
   &--small {
     display: block;
     font-size: 18px;
@@ -115,6 +124,10 @@ export default defineComponent({
   @include backgroundDark;
   @include loading;
   padding: 132px 20px 0;
+  @media only screen and (min-width: 768px) {
+    padding-top: 60px;
+    height: 100%;
+  }
   .title {
     max-width: $content-width;
     margin: 0 auto 10px;
@@ -124,7 +137,7 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     height: calc(100vh - 110px - 130px);
-    overflow-y: scroll;
+    overflow: scroll;
     padding-bottom: 30px;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -133,11 +146,19 @@ export default defineComponent({
     }
     list-style: none;
     padding-left: 0;
+    @media only screen and (min-width: 768px) {
+      height: calc(100vh - 143px);
+      padding-bottom: 0;
+    }
   }
   .dream-list__dream {
     max-width: $content-width;
     min-width: 280px;
     width: 100%;
+    .router-link-active .dream-prev,
+    .dream-prev:hover {
+      border: 1px solid white;
+    }
   }
 }
 </style>
