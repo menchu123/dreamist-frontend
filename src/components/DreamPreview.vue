@@ -1,17 +1,19 @@
 <template>
-  <section class="dream-prev">
-    <div class="dream-prev__left">
-      <div class="dream-prev__date">{{ dreamDate() }}</div>
-      <div class="dream-prev__moon">
-        <font-awesome-icon icon="moon"></font-awesome-icon>
+  <router-link :to="/dream-form/ + dream.id">
+    <section class="dream-prev">
+      <div class="dream-prev__left">
+        <div class="dream-prev__date">{{ dreamDate() }}</div>
+        <div class="dream-prev__moon">
+          <font-awesome-icon icon="moon"></font-awesome-icon>
+        </div>
       </div>
-    </div>
-    <div class="dream-prev__prev">
-      <h2 class="dream-prev__title">{{ dream.title }}</h2>
-      <p class="dream-prev__text">{{ dreamDescription() }}</p>
-      <section class="dream-prev__type" :class="dream.type">{{ dreamType() }}</section>
-    </div>
-  </section>
+      <div class="dream-prev__prev">
+        <h2 class="dream-prev__title">{{ dream.title }}</h2>
+        <p class="dream-prev__text">{{ dreamDescription() }}</p>
+        <section class="dream-prev__type" :class="dream.type">{{ dreamType() }}</section>
+      </div>
+    </section>
+  </router-link>
 </template>
 
 <script lang="ts">
@@ -42,16 +44,13 @@ export default defineComponent({
 
 <style lang="scss">
 @import "./src/styles/variables";
-
 .dream-prev {
   background-color: $blue2;
-  margin: 0 auto 20px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
-  max-width: $content-width;
-  min-width: 280px;
+  align-self: stretch;
   min-height: 126px;
   border-radius: 15px;
   padding-left: 10px;
