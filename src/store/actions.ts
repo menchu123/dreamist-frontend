@@ -99,6 +99,9 @@ const actions = {
       return "Not logged in";
     }
   },
+  isMobileAction({ commit }: ActionContext<State, State>, isMobile: boolean): string | void {
+    commit("isMobileMutation", isMobile);
+  },
 };
 
 export default actions;

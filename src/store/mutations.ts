@@ -37,6 +37,9 @@ const mutations = {
         : dream
     );
   },
+  isMobileMutation(state: State, payload: boolean): void {
+    state.isMobile = payload;
+  },
 };
 
 export default mutations;
