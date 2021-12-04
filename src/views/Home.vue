@@ -20,9 +20,7 @@
     </section>
     <ul v-else class="dream-list">
       <li class="dream-list__dream" v-for="dream in sortDreams" :key="dream.id">
-        <router-link :to="/dream-form/ + dream.id">
-          <DreamPreview :dream="dream" />
-        </router-link>
+        <DreamPreview :dream="dream" />
       </li>
     </ul>
     <NavBar />
@@ -122,7 +120,10 @@ export default defineComponent({
     margin: 0 auto 10px;
   }
   .dream-list {
-    height: calc(100vh - 110px - 150px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - 110px - 130px);
     overflow-y: scroll;
     padding-bottom: 30px;
     -ms-overflow-style: none;
@@ -132,6 +133,11 @@ export default defineComponent({
     }
     list-style: none;
     padding-left: 0;
+  }
+  .dream-list__dream {
+    max-width: $content-width;
+    min-width: 280px;
+    width: 100%;
   }
 }
 </style>

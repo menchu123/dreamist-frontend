@@ -6,7 +6,9 @@
     <router-link to="/dream-form" class="nav__add-dream-button"
       ><font-awesome-icon icon="plus"></font-awesome-icon
     ></router-link>
-    <font-awesome-icon class="nav__icon nav__icon-stats" icon="chart-pie"></font-awesome-icon>
+    <router-link to="/statistics">
+      <font-awesome-icon class="nav__icon nav__icon-stats" icon="chart-pie"></font-awesome-icon>
+    </router-link>
   </section>
 </template>
 
@@ -27,7 +29,7 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   padding: 0 50px;
-  height: 87px;
+  height: 60px;
   width: 100%;
   background-color: $darkBackground;
   position: fixed;
@@ -37,7 +39,7 @@ export default defineComponent({
   color: $blue1;
   border-top: 1px solid $blue1;
   &__icon {
-    font-size: 30px;
+    font-size: 25px;
     &:active {
       color: $lightgrey;
     }
@@ -47,10 +49,10 @@ export default defineComponent({
   }
   &__add-dream-button {
     color: #fff;
-    font-size: 40px;
+    font-size: 35px;
     background-color: $pink1;
-    height: 125px;
-    width: 125px;
+    height: 100px;
+    width: 100px;
     text-align: center;
     border-radius: 50%;
     position: relative;
