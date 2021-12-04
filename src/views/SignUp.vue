@@ -3,6 +3,9 @@
     <Moon />
     <h1 class="signup__title">Create your account</h1>
     <form action="" class="signup__form" novalidate autocomplete="off" @submit.prevent="onSubmit">
+      <span v-if="wrongCredentials" class="wrong-credentials"
+        >Username taken! Please try again</span
+      >
       <input type="text" name="name" id="name" placeholder="Name" v-model="name" maxlength="30" />
       <input
         type="text"
@@ -24,9 +27,6 @@
       <button type="submit" :disabled="username === '' || password === '' || name === ''">
         SIGN UP
       </button>
-      <span v-if="wrongCredentials" class="wrong-credentials"
-        >Username taken! Please try again</span
-      >
     </form>
     <div class="bottom-link">
       <p class="bottom-link__text">

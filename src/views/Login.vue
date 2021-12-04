@@ -3,6 +3,9 @@
     <Moon />
     <h1 class="login__title">Welcome back!</h1>
     <form class="login__form" novalidate autocomplete="off" @submit.prevent="onSubmit">
+      <span v-if="wrongCredentials" class="wrong-credentials"
+        >Wrong credentials! Please try again</span
+      >
       <input
         type="text"
         name="username"
@@ -22,9 +25,6 @@
         maxlength="30"
       />
       <button type="submit" :disabled="username === '' || password === ''">LOG IN</button>
-      <span v-if="wrongCredentials" class="wrong-credentials"
-        >Wrong credentials! Please try again</span
-      >
     </form>
     <div class="bottom-link">
       <p class="bottom-link__text">

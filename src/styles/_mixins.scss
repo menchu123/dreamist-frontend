@@ -33,6 +33,7 @@
   margin: 0 auto;
   max-width: $content-width;
   min-width: 280px;
+  position: relative;
   input {
     height: 60px;
     border-radius: 15px;
@@ -51,8 +52,10 @@
   .wrong-credentials {
     text-align: center;
     width: 100%;
-    margin-top: 10px;
+    margin-bottom: 10px;
     color: $pink1;
+    position: absolute;
+    top: -35px;
   }
   ::placeholder {
     font-family: $font-family;
@@ -116,9 +119,8 @@
     color: $pink2;
   }
   text-align: center;
-  position: fixed;
-  bottom: 20px;
-  left: 0;
+  position: relative;
+  margin-top: 20px;
   width: 100%;
 }
 
