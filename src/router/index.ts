@@ -16,19 +16,16 @@ const routes: Array<RouteRecordRaw> = [
         path: "",
         name: "Home",
         component: Home,
-        props: true,
       },
       {
         path: "/dream-form",
         name: "DreamForm",
         component: DreamForm,
-        props: true,
         children: [
           {
             path: "/",
             name: "DreamForm",
             component: DreamForm,
-            props: true,
           },
           {
             path: "/dream-form/:id",

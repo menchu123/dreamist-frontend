@@ -10,7 +10,9 @@
         <home />
       </div>
       <div class="right">
-        <dream-form></dream-form>
+        <dream-form>
+          <router-view />
+        </dream-form>
       </div>
     </template>
   </div>
@@ -36,12 +38,6 @@ export default defineComponent({
     if (typeof window !== "undefined") {
       window.removeEventListener("resize", this.onResize);
     }
-  },
-
-  computed: {
-    current() {
-      return this.$route.name === "Index" || this.$route.name === "AppNewsList" ? Home : DreamForm;
-    },
   },
 
   mounted() {
