@@ -301,10 +301,14 @@ export default defineComponent({
 
       const description: HTMLElement = this.$refs.textarea as HTMLElement;
       this.$nextTick(() => {
-        description.setAttribute(
-          "style",
-          `height:${description.scrollHeight}px;overflow-y:hidden;`
-        );
+        try {
+          description.setAttribute(
+            "style",
+            `height:${description.scrollHeight}px;overflow-y:hidden;`
+          );
+        } catch {
+          return "Description is null";
+        }
       });
     },
   },
