@@ -62,9 +62,11 @@
           id="description"
           placeholder="Write your description here..."
           @input="adjustSize($event.target)"
+          @focus="adjustSize($event.target)"
           v-model="description"
           maxlength="600"
           ref="textarea"
+          style="`height:${description.scrollHeight}px;overflow-y:hidden;`"
         />
       </section>
       <section class="form__category">
@@ -221,10 +223,17 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(["user", "currentDream", "isLoading", "isMobile"]),
+    ...mapState(["user", "currentDream", "isLoading", "isMobile", "transcription"]),
   },
   methods: {
-    ...mapActions(["addDream", "checkToken", "getCurrentDream", "deleteDream", "updateDream"]),
+    ...mapActions([
+      "addDream",
+      "checkToken",
+      "getCurrentDream",
+      "deleteDream",
+      "updateDream",
+      "fillInTranscription",
+    ]),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     adjustSize(textarea: any) {
       textarea.style.height = "auto";
@@ -346,12 +355,18 @@ export default defineComponent({
   async mounted() {
     this.checkToken();
     this.redirectToLogin();
+    if (this.transcription !== "") {
+      this.description = this.transcription;
+    }
     const route = useRoute();
     const { id } = route.params;
     if (id) {
       await this.getCurrentDream(id);
       this.populateForm();
     }
+  },
+  beforeUnmount() {
+    this.fillInTranscription("");
   },
 });
 </script>
