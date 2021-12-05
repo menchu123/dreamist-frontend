@@ -46,6 +46,9 @@ const mutations = {
   notRecordingMutation(state: State): void {
     state.isRecording = false;
   },
+  addTranscription(state: State, payload: string): void {
+    state.transcription = payload;
+  },
 };
 
 export default mutations;

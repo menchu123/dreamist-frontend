@@ -108,6 +108,9 @@ const actions = {
   stopRecording({ commit }: ActionContext<State, State>): void {
     commit("notRecordingMutation");
   },
+  fillInTranscription({ commit }: ActionContext<State, State>, text: string): void {
+    commit("addTranscription", text);
+  },
 };
 
 export default actions;
