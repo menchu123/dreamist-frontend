@@ -1,4 +1,5 @@
 <template>
+  <VoiceRecognition v-if="isRecording" />
   <router-view :key="$route.path" />
 </template>
 
@@ -6,12 +7,16 @@
 /* eslint-disable vue/no-unused-components */
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "vuex";
+import VoiceRecognition from "@/components/VoiceRecognition.vue";
 
 export default defineComponent({
   name: "Index",
+  components: {
+    VoiceRecognition,
+  },
 
   computed: {
-    ...mapState(["isMobile", "isLoading", "isSaving"]),
+    ...mapState(["isMobile", "isLoading", "isSaving", "isRecording"]),
   },
 
   beforeUnmount() {
