@@ -1,8 +1,13 @@
 import { mount } from "@vue/test-utils";
 import { createStore } from "vuex";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 import { createRouter, createWebHistory } from "vue-router";
-import SignUp from "../../src/views/SignUp.vue";
+import FormComponent from "../../src/components/FormComponent.vue";
 import state from "../mockState";
+
+library.add(fas);
 
 const router = createRouter({
   history: createWebHistory(),
@@ -19,12 +24,24 @@ const router = createRouter({
         template: "Login",
       },
     },
+    {
+      path: "/dream-form",
+      component: {
+        template: "Form",
+      },
+    },
+    {
+      path: "/statistics",
+      component: {
+        template: "Statistics",
+      },
+    },
   ],
 });
 
-describe("Given a SignUp component", () => {
+describe("Given a FormComponent component", () => {
   describe("When is rendered", () => {
-    test("Should render the section html tag", async () => {
+    test("Then it should render the form html tag with a class form", async () => {
       const store = createStore({
         state() {
           return state;
@@ -32,14 +49,17 @@ describe("Given a SignUp component", () => {
         actions: { checkToken: jest.fn() },
       });
 
-      const wrapper = mount(SignUp, {
+      const wrapper = mount(FormComponent, {
         global: {
           plugins: [router, store],
         },
-        stubs: ["router-link", "router-view"],
+        components: {
+          "font-awesome-icon": FontAwesomeIcon,
+        },
+        stubs: ["router-link", "router-view", "FontAwesomeIcon"],
       });
       await router.isReady();
-      expect(wrapper.html()).toContain('<section class="signup">');
+      expect(wrapper.html()).toContain('<form class="form" autocomplete="off" novalidate="">');
     });
   });
   describe("When the form is submitted", () => {
@@ -48,10 +68,10 @@ describe("Given a SignUp component", () => {
         state() {
           return state;
         },
-        actions: { loginUser: jest.fn(), checkToken: jest.fn() },
+        actions: { addDream: jest.fn(), checkToken: jest.fn() },
       });
 
-      const wrapper = mount(SignUp, {
+      const wrapper = mount(FormComponent, {
         global: {
           plugins: [router, store],
         },

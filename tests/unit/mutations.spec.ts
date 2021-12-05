@@ -148,4 +148,14 @@ describe("Given a store mutations object", () => {
       expect(state.dreams).not.toContainEqual(deletedDream);
     });
   });
+  describe("When isMobileMutation receives a state and a payload with a true", () => {
+    test("Then isMobile should be changed to true", () => {
+      state = stateMock;
+      const payload = true;
+
+      mutations.isMobileMutation(state, payload);
+
+      expect(state.isMobile).toBeTruthy();
+    });
+  });
 });
