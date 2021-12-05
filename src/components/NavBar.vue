@@ -6,6 +6,9 @@
     <router-link to="/dream-form" class="nav__add-dream-button"
       ><font-awesome-icon icon="plus"></font-awesome-icon
     ></router-link>
+    <button class="microphone-button" @click="startRecording">
+      <font-awesome-icon class="microphone" icon="microphone"></font-awesome-icon>
+    </button>
     <router-link to="/statistics">
       <font-awesome-icon class="nav__icon nav__icon-stats" icon="chart-pie"></font-awesome-icon>
     </router-link>
@@ -38,11 +41,12 @@ import { mapState, mapActions } from "vuex";
 
 export default defineComponent({
   name: "NavBar",
+
   computed: {
     ...mapState(["isMobile"]),
   },
   methods: {
-    ...mapActions(["logoutUser"]),
+    ...mapActions(["logoutUser", "startRecording"]),
     logout() {
       this.logoutUser();
       this.$router.push("/login");
@@ -53,6 +57,24 @@ export default defineComponent({
 
 <style lang="scss">
 @import "./src/styles/variables";
+.microphone-button {
+  position: absolute;
+  right: calc(50% - 80px);
+  background-color: $pink2;
+  font-size: 25px;
+  color: #fff;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  &:active {
+    background-color: $pink1;
+  }
+}
 .nav-desktop {
   position: absolute;
   top: 0;
