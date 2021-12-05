@@ -33,15 +33,13 @@ export default defineComponent({
     };
   },
   methods: {
-    ...mapActions(["stopRecording"]),
+    ...mapActions(["stopRecording", "fillInTranscription"]),
     startTxtToSpeech() {
-      // initialisation of voicereco
       window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new window.SpeechRecognition();
       recognition.lang = this.lang;
       recognition.interimResults = true;
 
-      // event current voice reco word
       recognition.addEventListener("result", (event) => {
         const text = Array.from(event.results)
           .map((result) => result[0])
@@ -53,13 +51,17 @@ export default defineComponent({
       // end of transcription
       recognition.addEventListener("end", () => {
         this.transcription.push(this.runtimeTranscription);
+        this.fillInTranscription(this.runtimeTranscription);
         this.runtimeTranscription = "";
         recognition.stop();
+        this.$router.push("/dream-form");
+        this.stopRecording();
       });
       recognition.start();
     },
   },
   mounted() {
+    this.fillInTranscription("");
     this.startTxtToSpeech();
   },
 });
