@@ -10,13 +10,13 @@ const router = createRouter({
     {
       path: "/",
       component: {
-        template: "Welcome to the blogging app",
+        template: "Home",
       },
     },
     {
       path: "/login",
       component: {
-        template: "Welcome to the blogging app",
+        template: "Login",
       },
     },
   ],
