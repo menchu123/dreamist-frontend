@@ -10,7 +10,6 @@
       Start describing your dream. The app will stop the recording and redirect you when you finish
       talking.
     </h3>
-    <div class="speech-to-txt" @click="startTxtToSpeech">S</div>
     <div class="speech-transciption">
       <div v-for="(word, index) in transcription" :key="index">
         {{ word }}
@@ -60,6 +59,9 @@ export default defineComponent({
       recognition.start();
     },
   },
+  mounted() {
+    this.startTxtToSpeech();
+  },
 });
 </script>
 
@@ -79,6 +81,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   margin-bottom: 40px;
+  z-index: 4;
 
   animation: pulse 2s infinite;
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
@@ -116,6 +119,7 @@ export default defineComponent({
     text-align: center;
     font-size: 16px;
     line-height: 20px;
+    z-index: 4;
   }
   &__back {
     position: absolute;
@@ -124,6 +128,7 @@ export default defineComponent({
     font-size: 30px;
     height: 30px;
     width: 30px;
+    z-index: 4;
   }
 }
 .speech-to-txt {
@@ -140,12 +145,16 @@ export default defineComponent({
   position: fixed;
 }
 .speech-transciption {
-  width: 500px;
-  padding: 20px;
-  border: 2px solid grey;
-  background-color: rgb(211, 228, 253);
-  border-radius: 20px;
+  top: -20px;
+  bottom: -20px;
+  right: -20px;
+  left: -20px;
+  background: transparent;
   position: fixed;
-  visibility: hidden;
+  opacity: 0.15;
+  font-size: 30px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 500;
+  text-align: justify;
 }
 </style>
