@@ -40,6 +40,12 @@ const mutations = {
   isMobileMutation(state: State, payload: boolean): void {
     state.isMobile = payload;
   },
+  isRecordingMutation(state: State): void {
+    state.isRecording = true;
+  },
+  notRecordingMutation(state: State): void {
+    state.isRecording = false;
+  },
 };
 
 export default mutations;

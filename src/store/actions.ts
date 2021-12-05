@@ -102,6 +102,12 @@ const actions = {
   isMobileAction({ commit }: ActionContext<State, State>, isMobile: boolean): string | void {
     commit("isMobileMutation", isMobile);
   },
+  startRecording({ commit }: ActionContext<State, State>): void {
+    commit("isRecordingMutation");
+  },
+  stopRecording({ commit }: ActionContext<State, State>): void {
+    commit("notRecordingMutation");
+  },
 };
 
 export default actions;
