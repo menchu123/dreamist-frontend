@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { createRouter, createWebHistory } from "vue-router";
-import NavBar from "../../src/components/NavBar.vue";
+import FormComponent from "../../src/components/FormComponent.vue";
 import state from "../mockState";
 
 library.add(fas);
@@ -39,16 +39,17 @@ const router = createRouter({
   ],
 });
 
-describe("Given a NavBar component", () => {
+describe("Given a FormComponent component", () => {
   describe("When is rendered", () => {
-    test("Then it should render the nav html tag with a class nav", async () => {
+    test("Then it should render the form html tag with a class form", async () => {
       const store = createStore({
         state() {
           return state;
         },
+        actions: { checkToken: jest.fn() },
       });
 
-      const wrapper = mount(NavBar, {
+      const wrapper = mount(FormComponent, {
         global: {
           plugins: [router, store],
         },
@@ -58,30 +59,30 @@ describe("Given a NavBar component", () => {
         stubs: ["router-link", "router-view", "FontAwesomeIcon"],
       });
       await router.isReady();
-      expect(wrapper.html()).toContain('<nav class="nav">');
+      expect(wrapper.html()).toContain('<form class="form" autocomplete="off" novalidate="">');
     });
   });
-  describe("When is rendered and the viewport is not mobile", () => {
-    test("Then it should render the nav html tag with a class nav", async () => {
+  describe("When the form is submitted", () => {
+    test("Then it should invoke onSubmit", () => {
       const store = createStore({
         state() {
-          const stateDesktop = state;
-          stateDesktop.isMobile = false;
-          return stateDesktop;
+          return state;
         },
+        actions: { addDream: jest.fn(), checkToken: jest.fn() },
       });
 
-      const wrapper = mount(NavBar, {
+      const wrapper = mount(FormComponent, {
         global: {
           plugins: [router, store],
         },
-        components: {
-          "font-awesome-icon": FontAwesomeIcon,
-        },
-        stubs: ["router-link", "router-view", "FontAwesomeIcon"],
+        stubs: ["router-link", "router-view"],
       });
-      await router.isReady();
-      expect(wrapper.html()).toContain('<nav class="nav-desktop">');
+
+      const onSubmit = jest.fn();
+      onSubmit();
+      const form = wrapper.get("form");
+      form.trigger("submit");
+      expect(onSubmit).toHaveBeenCalled();
     });
   });
 });
