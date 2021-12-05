@@ -18,6 +18,7 @@ const state = {
   isLoading: false,
   isMobile: false,
   isRecording: false,
+  transcription: "",
 };
 
 export default state;

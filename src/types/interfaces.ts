@@ -27,6 +27,7 @@ interface State {
   currentDream: Dream;
   isMobile: boolean;
   isRecording: boolean;
+  transcription: string;
 }
 interface UserLoginData {
   username: string;
