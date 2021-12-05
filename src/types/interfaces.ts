@@ -26,6 +26,7 @@ interface State {
   isLoading: boolean;
   currentDream: Dream;
   isMobile: boolean;
+  isRecording: boolean;
 }
 interface UserLoginData {
   username: string;

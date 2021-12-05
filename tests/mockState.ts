@@ -11,6 +11,7 @@ const stateMock = {
   },
   isLoading: false,
   isMobile: true,
+  isRecording: false,
 };
 
 export default stateMock as unknown as State;
