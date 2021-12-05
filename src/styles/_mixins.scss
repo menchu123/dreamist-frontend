@@ -2,7 +2,7 @@
 
 @mixin backgroundDark {
   background-color: $darkBackground;
-  height: 100vh;
+  min-height: 100vh;
   background-image: url("../assets/Background.svg");
   background-position-y: top;
   background-repeat: repeat-x;
