@@ -6,4 +6,19 @@ module.exports = {
       title: "Dreamist - Dream Journal",
     },
   },
+  pwa: {
+    name: "Dreamist",
+    short_name: "Dreamist",
+    themeColor: "#031138",
+    msTileColor: "#031138",
+    appleMobileWebAppCapable: "yes",
+
+    manifestOptions: {
+      name: "Dreamist",
+      short_name: "Dreamist",
+      display: "standalone",
+      background_color: "#031138",
+      theme_color: "#031138",
+    },
+  },
 };
