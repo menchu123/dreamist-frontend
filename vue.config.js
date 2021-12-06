@@ -32,6 +32,7 @@ module.exports = {
               statuses: [0, 200],
             },
           },
+          skipWaiting: true,
         },
       ],
       exclude: [/_redirects/],
