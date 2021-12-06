@@ -20,11 +20,7 @@ module.exports = {
       background_color: "#031138",
       theme_color: "#031138",
     },
-    workboxPluginMode: "InjectManifest",
     workboxOptions: {
-      swSrc: "src/service-worker.js",
-      // ...other Workbox options...
-      navigateFallback: "index.html",
       runtimeCaching: [
         {
           urlPattern: new RegExp(process.env.VUE_APP_API_URL),
