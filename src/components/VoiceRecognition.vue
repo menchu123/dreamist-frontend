@@ -19,7 +19,8 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineComponent } from "vue";
 import { mapActions } from "vuex";
 
@@ -28,24 +29,29 @@ export default defineComponent({
   data() {
     return {
       runtimeTranscription: "",
-      transcription: [],
+      transcription: [""],
       lang: "es-ES",
     };
   },
   methods: {
     ...mapActions(["stopRecording", "fillInTranscription"]),
     startTxtToSpeech() {
-      window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      const recognition = new window.SpeechRecognition();
+      (<any>window).SpeechRecognition =
+        (<any>window).SpeechRecognition || (<any>window).webkitSpeechRecognition;
+      const recognition = new (<any>window).SpeechRecognition();
       recognition.lang = this.lang;
       recognition.interimResults = true;
 
-      recognition.addEventListener("result", (event) => {
+      recognition.addEventListener("result", (event: any) => {
         const text = Array.from(event.results)
           .map((result) => result[0])
           .map((result) => result.transcript)
           .join("");
+        console.log(event.results[0]);
         this.runtimeTranscription = text;
+        if (this.runtimeTranscription.length === 600) {
+          recognition.stop();
+        }
       });
 
       // end of transcription
