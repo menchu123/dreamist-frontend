@@ -158,4 +158,31 @@ describe("Given a store mutations object", () => {
       expect(state.isMobile).toBeTruthy();
     });
   });
+  describe("When isRecordingMutation receives a state", () => {
+    test("Then isRecording should be changed to true", () => {
+      state = stateMock;
+
+      mutations.isRecordingMutation(state);
+
+      expect(state.isRecording).toBeTruthy();
+    });
+  });
+  describe("When notRecordingMutation receives a state", () => {
+    test("Then isRecording should be changed to false", () => {
+      state = stateMock;
+
+      mutations.notRecordingMutation(state);
+
+      expect(state.isRecording).toBeFalsy();
+    });
+  });
+  describe("When addTranscription receives a state and a payload with a string", () => {
+    test("Then transcription should be changed to the string", () => {
+      state = stateMock;
+      const payload = "description";
+      mutations.addTranscription(state, payload);
+
+      expect(state.transcription).toContain(payload);
+    });
+  });
 });
