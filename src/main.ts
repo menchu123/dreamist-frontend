@@ -7,6 +7,7 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import store from "./store";
 import router from "./router";
 import App from "./App.vue";
+import './registerServiceWorker'
 
 library.add(fas);
 library.add(fab);
