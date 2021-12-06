@@ -23,6 +23,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineComponent } from "vue";
 import { mapActions } from "vuex";
+import { SpeechRecognitionResult, SpeechRecognitionAlternative } from "@/types/interfaces";
 
 export default defineComponent({
   name: "DreamRecording",
@@ -43,11 +44,10 @@ export default defineComponent({
       recognition.interimResults = true;
 
       recognition.addEventListener("result", (event: any) => {
-        const text = Array.from(event.results)
-          .map((result) => result[0])
+        const text = Array.from(event.results as [SpeechRecognitionResult])
+          .map((result) => <SpeechRecognitionAlternative>result[0])
           .map((result) => result.transcript)
           .join("");
-        console.log(event.results[0]);
         this.runtimeTranscription = text;
         if (this.runtimeTranscription.length === 600) {
           recognition.stop();
