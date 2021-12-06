@@ -10,6 +10,7 @@ module.exports = {
       jsx: false,
     },
   },
+  ignorePatterns: ["service-worker.js"],
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-param-reassign": "off",
