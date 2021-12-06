@@ -21,6 +21,7 @@ module.exports = {
       theme_color: "#031138",
     },
     workboxOptions: {
+      skipWaiting: true,
       runtimeCaching: [
         {
           urlPattern: new RegExp(process.env.VUE_APP_API_URL),
@@ -32,7 +33,6 @@ module.exports = {
               statuses: [0, 200],
             },
           },
-          skipWaiting: true,
         },
       ],
       exclude: [/_redirects/],
