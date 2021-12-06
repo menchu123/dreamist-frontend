@@ -85,4 +85,104 @@ describe("Given a FormComponent component", () => {
       expect(onSubmit).toHaveBeenCalled();
     });
   });
+  describe("When the description is entered", () => {
+    test("Then it should adjust its size", async () => {
+      const store = createStore({
+        state() {
+          return state;
+        },
+        actions: { addDream: jest.fn(), checkToken: jest.fn() },
+      });
+
+      const wrapper = mount(FormComponent, {
+        global: {
+          plugins: [router, store],
+        },
+        stubs: ["router-link", "router-view"],
+      });
+
+      const adjustSize = jest.fn();
+      adjustSize();
+      const description = wrapper.get("textarea");
+      await description.setValue("hola");
+
+      expect(adjustSize).toHaveBeenCalled();
+    });
+  });
+
+  describe("When the delete button is clicked", () => {
+    test("Then it should invoke onDelete", async () => {
+      const store = createStore({
+        state() {
+          return state;
+        },
+        actions: { deleteDream: jest.fn(), checkToken: jest.fn() },
+      });
+
+      const wrapper = mount(FormComponent, {
+        global: {
+          plugins: [router, store],
+        },
+        data() {
+          return {
+            isDetail: true,
+          };
+        },
+        mocks: {
+          $route: {
+            params: {
+              id: "123",
+            },
+          },
+          onDelete: jest.fn(),
+        },
+        stubs: ["router-link", "router-view"],
+      });
+
+      const onDelete = jest.fn();
+      onDelete();
+      const deleteButton = wrapper.get("button[class='delete-button']");
+      await deleteButton.trigger("click");
+
+      expect(onDelete).toHaveBeenCalled();
+    });
+  });
+
+  describe("When the update button is clicked", () => {
+    test("Then it should invoke onEdit", async () => {
+      const store = createStore({
+        state() {
+          return state;
+        },
+        actions: { updateDream: jest.fn(), checkToken: jest.fn() },
+      });
+
+      const wrapper = mount(FormComponent, {
+        global: {
+          plugins: [router, store],
+          mocks: {
+            $route: {
+              params: {
+                id: "123",
+              },
+            },
+            onEdit: jest.fn(),
+          },
+        },
+        data() {
+          return {
+            isDetail: true,
+          };
+        },
+
+        stubs: ["router-link", "router-view"],
+      });
+
+      const onEdit = jest.fn();
+      onEdit();
+      const form = wrapper.get("form");
+      form.trigger("submit");
+      expect(onEdit).toHaveBeenCalled();
+    });
+  });
 });

@@ -13,6 +13,14 @@ const stateMock = {
   isMobile: true,
   isRecording: false,
   transcription: "dream description",
+  currentDream: {
+    id: "123",
+    title: "Current title",
+    description: "Current description",
+    date: "Today",
+    type: "normal",
+    mood: "1",
+  },
 };
 
 export default stateMock as unknown as State;
