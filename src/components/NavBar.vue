@@ -202,7 +202,7 @@ export default defineComponent({
 .nav.light {
   background-color: #f8c6c5;
   border-color: white;
-  color: rgba(255, 255, 255, 0.5);
+  color: $main1-light;
   .nav__add-dream-button {
     background-color: $accent1-light;
     &:active {

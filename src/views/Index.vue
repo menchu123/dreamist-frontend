@@ -1,5 +1,5 @@
 <template>
-  <div class="app__container">
+  <div class="app__container" :class="{ light: isLight }">
     <section v-if="(isLoading || isSaving) && !isMobile" class="loading-form">
       <div class="lds-ripple">
         <div></div>
@@ -40,12 +40,14 @@ export default defineComponent({
     DreamForm,
   },
   computed: {
-    ...mapState(["isMobile", "isLoading", "isSaving"]),
+    ...mapState(["isMobile", "isLoading", "isSaving", "isLight"]),
   },
 });
 </script>
 
 <style lang="scss" scoped>
+@import "./src/styles/variables";
+@import "./src/styles/mixins-light";
 .app__container {
   display: flex;
   @media only screen and (min-width: 768px) {
@@ -60,6 +62,9 @@ export default defineComponent({
       top: 0;
     }
   }
+}
+.app__container.light {
+  @include backgroundLight;
 }
 .left {
   flex: 1;
