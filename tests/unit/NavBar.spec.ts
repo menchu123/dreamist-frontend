@@ -84,8 +84,8 @@ describe("Given a NavBar component", () => {
       expect(wrapper.html()).toContain('<nav class="nav-desktop">');
     });
   });
-  describe("When is rendered and the viewport is not mobile", () => {
-    test.skip("Then it should render the nav html tag with a class nav", async () => {
+  describe("When is rendered when the viewport is not mobile, and the user clicks on logout", () => {
+    test("Then it should call logout()", async () => {
       const store = createStore({
         state() {
           const stateDesktop = state;
@@ -94,9 +94,20 @@ describe("Given a NavBar component", () => {
         },
       });
 
+      const $router = {
+        push: jest.fn(),
+      };
+      const $route = {
+        push: jest.fn(),
+      };
+
       const wrapper = mount(NavBar, {
         global: {
           plugins: [router, store],
+          mocks: {
+            $route,
+            $router,
+          },
         },
         components: {
           "font-awesome-icon": FontAwesomeIcon,
@@ -107,7 +118,7 @@ describe("Given a NavBar component", () => {
 
       const logoutButton = wrapper.get("button[class='top-link']");
       await logoutButton.trigger("click");
-
+      await router.isReady();
       expect(wrapper.html()).toContain('<nav class="nav-desktop">');
     });
   });
