@@ -1,0 +1,184 @@
+@import "./variables-light";
+
+@mixin backgroundLight {
+  background: linear-gradient(180deg, #9fc5ee 0%, #f8c6c5 100%);
+}
+
+@mixin userForm-light {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: $content-width;
+  min-width: 280px;
+  position: relative;
+  input {
+    height: 60px;
+    border-radius: 15px;
+    border: none;
+    margin-bottom: 20px;
+    background-color: $lightgrey-light;
+    padding: 0 20px;
+    font-size: 16px;
+  }
+  input:focus-visible {
+    outline: none;
+  }
+  .wrong {
+    color: $font-color-light;
+  }
+  .wrong-credentials {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+    color: $font-color-light;
+    position: absolute;
+    top: -35px;
+  }
+  ::placeholder {
+    font-family: $font-family;
+    letter-spacing: 0.05em;
+    font-size: 16px;
+    font-weight: 400;
+    color: $accent2-light;
+  }
+  button {
+    background-color: $accent1-light;
+    border: none;
+    color: $lightgrey-light;
+    font-size: 14px;
+    font-weight: 500;
+    height: 60px;
+    border-radius: 50px;
+  }
+  button:disabled {
+    background-color: $accent3-light;
+  }
+  button:active {
+    background-color: $accent2-light;
+  }
+  .shake {
+    animation: shake 0.3s;
+  }
+
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+}
+
+@mixin bottomLink-light {
+  p,
+  span {
+    font-size: 14px;
+    font-weight: 500;
+    color: $lightgrey-light;
+  }
+  span {
+    color: $font-color-light;
+  }
+  span:active {
+    color: $accent1-light;
+  }
+  text-align: center;
+  position: relative;
+  margin-top: 20px;
+  width: 100%;
+}
+
+@mixin button-light {
+  background-color: $accent1-light;
+  padding: 0 20px;
+  border: none;
+  color: $lightgrey-light;
+  height: 40px;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 200;
+  &:active {
+    background-color: $accent2-light;
+  }
+}
+
+@mixin loading-light {
+  .lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ripple div {
+    position: absolute;
+    border: 4px solid $lightgrey-light;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  .lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  @keyframes lds-ripple {
+    0% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 0px;
+      left: 0px;
+      width: 72px;
+      height: 72px;
+      opacity: 0;
+    }
+  }
+}
+
+@mixin moon-transition {
+  position: absolute;
+  width: 100vw;
+  height: 150px;
+  margin: 0;
+  top: 0;
+  left: 0;
+}
+
+.moon-image {
+  position: absolute;
+  left: calc(50% - ((($content-width) - 50px) / 2));
+  top: 50px;
+}
+
+.moonrise-enter-active {
+  animation: move-in 1.2s;
+}
+
+@keyframes move-in {
+  0% {
+    top: 150px;
+    left: calc(50% - ((($content-width) + 160px) / 2));
+    opacity: 0;
+  }
+  100% {
+    top: 50px;
+    opacity: 1;
+  }
+}
