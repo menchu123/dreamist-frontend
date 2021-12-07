@@ -1,7 +1,7 @@
 <template>
   <section class="moon">
     <transition name="moonrise" mode="out-in">
-      <img v-if="enter" src="@/assets/luna.png" alt="moon" class="moon-image" />
+      <img height="80" v-if="enter" src="@/assets/luna.png" alt="moon" class="moon-image" />
     </transition>
   </section>
 </template>

@@ -68,4 +68,48 @@ describe("Given a Home component", () => {
       expect(wrapper.html()).toContain('<div class="home">');
     });
   });
+  describe("When is rendered when the viewport is not mobile, and the user clicks on logout", () => {
+    test("Then it should call logout()", async () => {
+      const store = createStore({
+        state() {
+          const stateMobile = state;
+          stateMobile.isMobile = true;
+          return stateMobile;
+        },
+        actions: { logoutUser: jest.fn(), checkToken: jest.fn(), getDreamsFromApi: jest.fn() },
+      });
+
+      const $router = {
+        push: jest.fn(),
+      };
+      const $route = {
+        push: jest.fn(),
+      };
+
+      const wrapper = mount(Home, {
+        global: {
+          plugins: [router, store],
+          mocks: {
+            $route,
+            $router,
+          },
+        },
+        components: {
+          NavBar,
+          Moon,
+          DreamPreview,
+          "font-awesome-icon": FontAwesomeIcon,
+        },
+        stubs: ["router-link", "router-view", "FontAwesomeIcon"],
+      });
+      await router.isReady();
+
+      const logoutButton = wrapper.get(
+        "svg[class='svg-inline--fa fa-sign-out-alt fa-w-16 sign-out']"
+      );
+      await logoutButton.trigger("click");
+      await router.isReady();
+      expect(wrapper.html()).toContain('<div class="home">');
+    });
+  });
 });
