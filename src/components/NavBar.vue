@@ -6,7 +6,7 @@
     <router-link to="/dream-form" class="nav__add-dream-button"
       ><font-awesome-icon icon="plus"></font-awesome-icon
     ></router-link>
-    <button class="microphone-button" @click="startRecording">
+    <button aria-label="record" class="microphone-button" @click="startRecording">
       <font-awesome-icon class="microphone" icon="microphone"></font-awesome-icon>
     </button>
     <router-link to="/statistics">
