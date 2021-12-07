@@ -1,7 +1,7 @@
 <template>
   <section class="signup" :class="{ light: isLight }">
     <Moon />
-    <h3 class="signup__title">Create your account</h3>
+    <h2 class="signup__title">Create your account</h2>
     <form action="" class="signup__form" novalidate autocomplete="off" @submit.prevent="onSubmit">
       <span v-if="wrongCredentials" class="wrong-credentials"
         >Username taken! Please try again</span

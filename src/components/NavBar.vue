@@ -13,10 +13,11 @@
       <font-awesome-icon class="nav__icon nav__icon-stats" icon="chart-pie"></font-awesome-icon>
     </router-link>
   </nav>
-  <nav v-else class="nav-desktop">
+  <nav v-else class="nav-desktop" :class="{ light: isLight }">
     <router-link to="/">
       <div class="logo">
-        <img src="@/assets/luna.png" alt="" />
+        <img @click="toggleLight" v-if="isLight" src="@/assets/sol.png" alt="" />
+        <img @click="toggleLight" v-else src="@/assets/luna.png" alt="" />
         <h1 class="page-title">Dreamist</h1>
       </div>
     </router-link>
@@ -41,12 +42,17 @@ import { mapState, mapActions } from "vuex";
 
 export default defineComponent({
   name: "NavBar",
-
+  data() {
+    return {
+      imgSourceDark: "luna",
+      imgSourceLight: "sol",
+    };
+  },
   computed: {
     ...mapState(["isMobile", "isLight"]),
   },
   methods: {
-    ...mapActions(["logoutUser", "startRecording"]),
+    ...mapActions(["logoutUser", "startRecording", "toggleLight"]),
     logout() {
       this.logoutUser();
       this.$router.push("/login");
@@ -220,6 +226,30 @@ export default defineComponent({
   }
   .router-link-active {
     color: $lightgrey-light;
+  }
+}
+.nav-desktop.light {
+  color: $lightgrey-light;
+  .router-link-active .top-link {
+    color: $font-color-light;
+  }
+  .nav-desktop__add-dream-button {
+    background-color: $font-color-light;
+  }
+  .top-link:hover {
+    color: $accent2-light;
+  }
+  button.top-link {
+    background-color: $main1-light;
+    color: $font-color-light;
+    &:hover {
+      background-color: $accent1-light;
+      color: $lightgrey-light;
+    }
+    &:active {
+      background-color: $accent2-light;
+      color: $lightgrey-light;
+    }
   }
 }
 </style>
