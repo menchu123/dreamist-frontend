@@ -46,6 +46,7 @@ describe("Given a NavBar component", () => {
         state() {
           return state;
         },
+        actions: { logoutUser: jest.fn(), checkToken: jest.fn(), getDreamsFromApi: jest.fn() },
       });
 
       const wrapper = mount(NavBar, {
@@ -69,6 +70,7 @@ describe("Given a NavBar component", () => {
           stateDesktop.isMobile = false;
           return stateDesktop;
         },
+        actions: { logoutUser: jest.fn(), checkToken: jest.fn(), getDreamsFromApi: jest.fn() },
       });
 
       const wrapper = mount(NavBar, {
@@ -92,6 +94,7 @@ describe("Given a NavBar component", () => {
           stateDesktop.isMobile = false;
           return stateDesktop;
         },
+        actions: { logoutUser: jest.fn(), checkToken: jest.fn(), getDreamsFromApi: jest.fn() },
       });
 
       const $router = {
