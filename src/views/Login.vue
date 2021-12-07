@@ -1,5 +1,5 @@
 <template>
-  <section class="login">
+  <section class="login" :class="{ light: isLight }">
     <Moon />
     <h2 class="login__title">Welcome back!</h2>
     <form class="login__form" novalidate autocomplete="off" @submit.prevent="onSubmit">
@@ -56,7 +56,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["user", "isLight"]),
   },
   methods: {
     ...mapActions(["loginUser", "checkToken"]),
@@ -90,7 +90,9 @@ export default defineComponent({
 
 <style lang="scss">
 @import "./src/styles/variables";
+@import "./src/styles/variables-light";
 @import "./src/styles/mixins";
+@import "./src/styles/mixins-light";
 .login {
   @include backgroundGradient;
   overflow: hidden;
@@ -105,6 +107,21 @@ export default defineComponent({
   }
   .bottom-link {
     @include bottomLink;
+  }
+
+  &.light {
+    @include backgroundLight;
+    color: $font-color-light;
+    & h2 {
+      color: white;
+    }
+    .login__form {
+      @include userForm-light;
+      margin-top: 100px;
+    }
+    .bottom-link {
+      @include bottomLink-light;
+    }
   }
 }
 </style>
