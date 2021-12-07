@@ -1,5 +1,5 @@
 <template>
-  <nav v-if="isMobile" class="nav">
+  <nav v-if="isMobile" class="nav" :class="{ light: isLight }">
     <router-link aria-label="journal" to="/">
       <font-awesome-icon class="nav__icon nav__icon-book" icon="book"></font-awesome-icon>
     </router-link>
@@ -43,7 +43,7 @@ export default defineComponent({
   name: "NavBar",
 
   computed: {
-    ...mapState(["isMobile"]),
+    ...mapState(["isMobile", "isLight"]),
   },
   methods: {
     ...mapActions(["logoutUser", "startRecording"]),
@@ -57,6 +57,8 @@ export default defineComponent({
 
 <style lang="scss">
 @import "./src/styles/variables";
+@import "./src/styles/variables-light";
+
 .microphone-button {
   position: absolute;
   right: calc(50% - 80px);
@@ -177,6 +179,47 @@ export default defineComponent({
     &:active {
       background-color: $pink2;
     }
+  }
+  .microphone-button {
+    position: absolute;
+    right: calc(50% - 80px);
+    background-color: $pink2;
+    font-size: 25px;
+    color: #fff;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    &:active {
+      background-color: $pink1;
+    }
+  }
+}
+.nav.light {
+  background-color: #f8c6c5;
+  border-color: white;
+  color: rgba(255, 255, 255, 0.5);
+  .nav__add-dream-button {
+    background-color: $accent1-light;
+    &:active {
+      background-color: $accent2-light;
+    }
+  }
+  .microphone-button {
+    background-color: $accent3-light;
+    &:active {
+      background-color: $accent2-light;
+    }
+  }
+  .nav__icon:active {
+    color: $lightgrey-light;
+  }
+  .router-link-active {
+    color: $lightgrey-light;
   }
 }
 </style>
