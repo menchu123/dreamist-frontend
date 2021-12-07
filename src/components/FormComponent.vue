@@ -638,7 +638,7 @@ export default defineComponent({
   }
 }
 .form.light {
-  @include backgroundLight;
+  background: transparent;
   color: $font-color-light;
   .form__label {
     color: $font-color-light;

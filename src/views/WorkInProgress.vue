@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" :class="{ light: isLight }">
     <h2 class="wip-message">Under construction</h2>
     <section class="wip">
       <img class="wip-image" src="@/assets/wip.svg" alt="" />
@@ -10,12 +10,16 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { mapState } from "vuex";
 import NavBar from "@/components/NavBar.vue";
 
 export default defineComponent({
   name: "WorkInProgress",
   components: {
     NavBar,
+  },
+  computed: {
+    ...mapState(["user", "isLight"]),
   },
 });
 </script>
@@ -43,5 +47,10 @@ export default defineComponent({
 .wip-image {
   width: 100%;
   max-width: 400px;
+}
+.home.light {
+  .wip-message {
+    color: white;
+  }
 }
 </style>
