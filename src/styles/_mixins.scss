@@ -29,6 +29,16 @@
   background-repeat: repeat-x;
   background-size: cover;
   background-attachment: fixed;
+  @media only screen and (min-width: 768px) {
+    background: url("../assets/Background-fullBig.svg"),
+      linear-gradient(
+        180deg,
+        rgba(2, 17, 54, 0) 42.83%,
+        rgba(91, 30, 82, 0.52) 100%
+      ),
+      #031138;
+    background-repeat: no-repeat;
+  }
 }
 
 @mixin userForm {

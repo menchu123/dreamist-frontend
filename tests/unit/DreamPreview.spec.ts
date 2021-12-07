@@ -39,7 +39,30 @@ describe("Given a DreamPreview component", () => {
         props: {
           dream: {
             date: "2",
-            description: "hola",
+            description:
+              "Most angery pupper I have ever seen very hand that feed shibe pupperino much ruin.",
+            type: "normal",
+          },
+        },
+      });
+      await router.isReady();
+      expect(wrapper.html()).toContain('<section class="dream-prev">');
+    });
+  });
+  describe("When is rendered", () => {
+    test("Should render the a section html tag", async () => {
+      const wrapper = mount(DreamPreview, {
+        global: {
+          plugins: [router],
+        },
+        components: {
+          "font-awesome-icon": FontAwesomeIcon,
+        },
+        stubs: ["router-link", "router-view", "FontAwesomeIcon"],
+        props: {
+          dream: {
+            date: "2",
+            description: "Hola",
             type: "normal",
           },
         },

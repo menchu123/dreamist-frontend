@@ -301,8 +301,6 @@ export default defineComponent({
           this.isSaving = false;
           this.$router.push("/");
         }, 2000);
-      } else {
-        this.$router.push("/");
       }
     },
     onSubmit() {
@@ -447,7 +445,7 @@ export default defineComponent({
   margin: 0 auto;
   @media only screen and (min-width: 768px) {
     max-width: $content-width + 100px;
-    margin-top: 100px;
+    margin-top: 104px;
     height: 100%;
   }
   &__top-nav {
