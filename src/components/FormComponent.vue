@@ -7,6 +7,7 @@
   </section>
   <form
     class="form"
+    :class="{ light: isLight }"
     autocomplete="off"
     novalidate
     @submit.prevent="isDetail ? onEdit() : onSubmit()"
@@ -223,7 +224,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(["user", "currentDream", "isLoading", "isMobile", "transcription"]),
+    ...mapState(["user", "currentDream", "isLoading", "isMobile", "transcription", "isLight"]),
   },
   methods: {
     ...mapActions([
@@ -372,6 +373,8 @@ export default defineComponent({
 <style lang="scss">
 @import "./src/styles/variables";
 @import "./src/styles/mixins";
+@import "./src/styles/variables-light";
+@import "./src/styles/mixins-light";
 .footer {
   height: 50px;
 }
@@ -632,6 +635,57 @@ export default defineComponent({
         cursor: pointer;
       }
     }
+  }
+}
+.form.light {
+  background: transparent;
+  color: $font-color-light;
+  .form__label {
+    color: $font-color-light;
+  }
+  .form__input {
+    color: $lightgrey-light;
+  }
+  .form__input::placeholder {
+    color: $main1-light;
+  }
+  .form__category-buttons {
+    background-color: rgba(255, 255, 255, 40%);
+    input[type="radio"]:checked + .form__category-button-label--normal {
+      background-color: $normal-light;
+    }
+    input[type="radio"]:checked + .form__category-button-label--lucid {
+      background-color: $lucid-light;
+    }
+    input[type="radio"]:checked + .form__category-button-label--nightmare {
+      background-color: $nightmare-light;
+    }
+    input[type="radio"]:checked + .form__category-button-label--daydream {
+      background-color: $daydream-light;
+    }
+  }
+  .form__category-button-label {
+    border-color: $lightgrey-light;
+    color: $lightgrey-light;
+  }
+  .form__mood-buttons {
+    color: $main1-light;
+    input[type="radio"]:checked + .form__mood-button-label {
+      color: $accent2-light;
+    }
+  }
+  .form__attachment-button {
+    color: $accent3-light;
+    background-color: $accent2-light;
+  }
+  .form__back {
+    color: $lightgrey-light;
+  }
+  .form__save {
+    @include button-light;
+  }
+  .form__time {
+    background-color: $main1-light;
   }
 }
 </style>

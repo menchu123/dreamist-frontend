@@ -49,6 +49,9 @@ const mutations = {
   addTranscription(state: State, payload: string): void {
     state.transcription = payload;
   },
+  lightMode(state: State): void {
+    state.isLight = !state.isLight;
+  },
 };
 
 export default mutations;

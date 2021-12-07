@@ -1,5 +1,5 @@
 <template>
-  <section class="dream-recording">
+  <section class="dream-recording" :class="{ light: isLight }">
     <div class="dream-recording__back" @click="stopRecording">
       <font-awesome-icon icon="angle-left"></font-awesome-icon>
     </div>
@@ -22,7 +22,7 @@
 <script lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { defineComponent } from "vue";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import { SpeechRecognitionResult } from "@/types/interfaces";
 
 export default defineComponent({
@@ -33,6 +33,9 @@ export default defineComponent({
       transcription: [""],
       lang: "es-ES",
     };
+  },
+  computed: {
+    ...mapState(["isLight"]),
   },
   methods: {
     ...mapActions(["stopRecording", "fillInTranscription"]),
@@ -76,6 +79,7 @@ export default defineComponent({
 <style lang="scss">
 @import "./src/styles/variables";
 @import "./src/styles/mixins";
+@import "./src/styles/mixins-light";
 
 .pulsing-mic {
   background-color: $pink2;
@@ -153,7 +157,7 @@ export default defineComponent({
   position: fixed;
 }
 .speech-transciption {
-  top: -20px;
+  top: -10px;
   bottom: -20px;
   right: -20px;
   left: -20px;
@@ -164,5 +168,37 @@ export default defineComponent({
   font-family: "Courier New", Courier, monospace;
   font-weight: 500;
   text-align: justify;
+}
+.dream-recording.light {
+  @include backgroundLight;
+  .dream-recording__message {
+    color: $lightgrey-light;
+  }
+  .dream-recording__message {
+    color: $lightgrey-light;
+  }
+  .pulsing-mic {
+    background-color: $accent1-light;
+  }
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(162, 167, 208, 0.7);
+    }
+
+    70% {
+      box-shadow: 0 0 0 60px rgba(162, 167, 208, 0);
+    }
+
+    100% {
+      box-shadow: 0 0 0 0 rgba(162, 167, 208, 0);
+    }
+  }
+  .speech-transciption {
+    color: $lightgrey-light;
+    opacity: 0.5;
+  }
+  .dream-recording__back {
+    color: $lightgrey-light;
+  }
 }
 </style>

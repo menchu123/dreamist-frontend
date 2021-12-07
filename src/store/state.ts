@@ -19,6 +19,7 @@ const state = {
   isMobile: false,
   isRecording: false,
   transcription: "",
+  isLight: false,
 };
 
 export default state;

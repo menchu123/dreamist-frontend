@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" :class="{ light: isLight }">
     <font-awesome-icon
       v-if="isMobile"
       @click.prevent="logout()"
@@ -50,7 +50,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(["dreams", "user", "isLoading", "isMobile"]),
+    ...mapState(["dreams", "user", "isLoading", "isMobile", "isLight"]),
     ...mapGetters(["sortDreams"]),
   },
   methods: {
@@ -83,43 +83,9 @@ export default defineComponent({
 <style lang="scss">
 @import "./src/styles/variables";
 @import "./src/styles/mixins";
+@import "./src/styles/variables-light";
+@import "./src/styles/mixins-light";
 
-.sign-out {
-  position: absolute;
-  right: calc(50% - (($content-width - 60px) / 2));
-  top: 60px;
-  font-size: 20px;
-  color: $lightgrey;
-  &:active {
-    color: $blue1;
-  }
-  z-index: 2;
-}
-.no-dreams {
-  font-size: 28px;
-  text-align: center;
-  font-weight: 700;
-  margin-top: 200px;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  h2 {
-    width: $content-width;
-  }
-  &--small {
-    display: block;
-    font-size: 18px;
-    font-weight: 400;
-    margin-top: 20px;
-  }
-}
-.loading {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 200px;
-}
 .home {
   @include backgroundDark;
   @include loading;
@@ -159,6 +125,51 @@ export default defineComponent({
     .dream-prev:hover {
       border: 1px solid white;
     }
+  }
+  .sign-out {
+    position: absolute;
+    right: calc(50% - (($content-width - 60px) / 2));
+    top: 60px;
+    font-size: 20px;
+    color: $lightgrey;
+    &:active {
+      color: $blue1;
+    }
+    z-index: 2;
+  }
+  .no-dreams {
+    font-size: 28px;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    h2 {
+      width: $content-width;
+    }
+    &--small {
+      display: block;
+      font-size: 18px;
+      font-weight: 400;
+      margin-top: 20px;
+    }
+  }
+  .loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+  }
+}
+.home.light {
+  @include backgroundLight;
+  .title {
+    color: $lightgrey-light;
+  }
+  .sign-out {
+    color: $lightgrey-light;
   }
 }
 </style>

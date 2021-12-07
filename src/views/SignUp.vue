@@ -1,7 +1,7 @@
 <template>
-  <section class="signup">
+  <section class="signup" :class="{ light: isLight }">
     <Moon />
-    <h3 class="signup__title">Create your account</h3>
+    <h2 class="signup__title">Create your account</h2>
     <form action="" class="signup__form" novalidate autocomplete="off" @submit.prevent="onSubmit">
       <span v-if="wrongCredentials" class="wrong-credentials"
         >Username taken! Please try again</span
@@ -60,7 +60,7 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["user", "isLight"]),
   },
   methods: {
     ...mapActions(["checkToken"]),
@@ -94,6 +94,8 @@ export default defineComponent({
 <style lang="scss">
 @import "./src/styles/variables";
 @import "./src/styles/mixins";
+@import "./src/styles/variables-light";
+@import "./src/styles/mixins-light";
 .signup {
   @include backgroundGradient;
   padding: 132px 20px 0;
@@ -107,6 +109,20 @@ export default defineComponent({
   }
   .bottom-link {
     @include bottomLink;
+  }
+  &.light {
+    @include backgroundLight;
+    color: $font-color-light;
+    & h2 {
+      color: white;
+    }
+    .signup__form {
+      @include userForm-light;
+      margin-top: 100px;
+    }
+    .bottom-link {
+      @include bottomLink-light;
+    }
   }
 }
 </style>

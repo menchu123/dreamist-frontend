@@ -111,6 +111,9 @@ const actions = {
   fillInTranscription({ commit }: ActionContext<State, State>, text: string): void {
     commit("addTranscription", text);
   },
+  toggleLight({ commit }: ActionContext<State, State>): void {
+    commit("lightMode");
+  },
 };
 
 export default actions;

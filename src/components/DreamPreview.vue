@@ -1,6 +1,6 @@
 <template>
   <router-link :to="/dream-form/ + dream.id">
-    <section class="dream-prev">
+    <section class="dream-prev" :class="{ light: isLight }">
       <div class="dream-prev__left">
         <div class="dream-prev__date">{{ dreamDate() }}</div>
         <div class="dream-prev__moon">
@@ -18,10 +18,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { mapState } from "vuex";
 
 export default defineComponent({
   name: "DreamPreview",
   props: ["dream"],
+  computed: {
+    ...mapState(["isLight"]),
+  },
   methods: {
     dreamType() {
       return this.dream.type.toUpperCase();
@@ -44,6 +48,8 @@ export default defineComponent({
 
 <style lang="scss">
 @import "./src/styles/variables";
+@import "./src/styles/variables-light";
+@import "./src/styles/mixins-light";
 
 .dream-prev {
   background-color: $blue2;
@@ -100,6 +106,26 @@ export default defineComponent({
   }
   .daydream {
     background-color: $daydream;
+  }
+}
+.dream-prev.light {
+  background-color: $main1-light;
+  color: $font-color-light;
+  .dream-prev__type {
+    color: $lightgrey-light;
+    border-color: $lightgrey-light;
+  }
+  .normal {
+    background-color: $normal-light;
+  }
+  .lucid {
+    background-color: $lucid-light;
+  }
+  .nightmare {
+    background-color: $nightmare-light;
+  }
+  .daydream {
+    background-color: $daydream-light;
   }
 }
 </style>
