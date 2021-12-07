@@ -1,15 +1,15 @@
 <template>
   <nav v-if="isMobile" class="nav">
-    <router-link to="/">
+    <router-link aria-label="journal" to="/">
       <font-awesome-icon class="nav__icon nav__icon-book" icon="book"></font-awesome-icon>
     </router-link>
-    <router-link to="/dream-form" class="nav__add-dream-button"
+    <router-link aria-label="add-dream" to="/dream-form" class="nav__add-dream-button"
       ><font-awesome-icon icon="plus"></font-awesome-icon
     ></router-link>
     <button aria-label="record" class="microphone-button" @click="startRecording">
       <font-awesome-icon class="microphone" icon="microphone"></font-awesome-icon>
     </button>
-    <router-link to="/statistics">
+    <router-link aria-label="analysis" to="/statistics">
       <font-awesome-icon class="nav__icon nav__icon-stats" icon="chart-pie"></font-awesome-icon>
     </router-link>
   </nav>
