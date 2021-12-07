@@ -52,6 +52,7 @@ interface State {
   isMobile: boolean;
   isRecording: boolean;
   transcription: string;
+  isLight: boolean;
 }
 interface UserLoginData {
   username: string;

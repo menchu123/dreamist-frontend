@@ -21,6 +21,7 @@ const stateMock = {
     type: "normal",
     mood: "1",
   },
+  isLight: false,
 };
 
 export default stateMock as unknown as State;
