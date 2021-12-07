@@ -84,4 +84,31 @@ describe("Given a NavBar component", () => {
       expect(wrapper.html()).toContain('<nav class="nav-desktop">');
     });
   });
+  describe("When is rendered and the viewport is not mobile", () => {
+    test.skip("Then it should render the nav html tag with a class nav", async () => {
+      const store = createStore({
+        state() {
+          const stateDesktop = state;
+          stateDesktop.isMobile = false;
+          return stateDesktop;
+        },
+      });
+
+      const wrapper = mount(NavBar, {
+        global: {
+          plugins: [router, store],
+        },
+        components: {
+          "font-awesome-icon": FontAwesomeIcon,
+        },
+        stubs: ["router-link", "router-view", "FontAwesomeIcon"],
+      });
+      await router.isReady();
+
+      const logoutButton = wrapper.get("button[class='top-link']");
+      await logoutButton.trigger("click");
+
+      expect(wrapper.html()).toContain('<nav class="nav-desktop">');
+    });
+  });
 });
