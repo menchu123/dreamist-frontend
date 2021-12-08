@@ -59,6 +59,7 @@ body {
   min-height: 100vh;
   width: 100vw;
   min-height: -webkit-fill-available;
+  overflow-y: hidden;
 }
 h2 {
   color: $lightgrey;
