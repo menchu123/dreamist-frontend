@@ -214,3 +214,12 @@ describe("Given a fillInTranscription action", () => {
     });
   });
 });
+describe("Given a toggleLight action", () => {
+  describe("When the action is invoked", () => {
+    test("Then it should call commit with lightMode", async () => {
+      await actions.toggleLight(configActionContext(commit));
+      expect(commit).toHaveBeenCalled();
+      expect(commit).toHaveBeenCalledWith("lightMode");
+    });
+  });
+});

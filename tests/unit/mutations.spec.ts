@@ -185,4 +185,14 @@ describe("Given a store mutations object", () => {
       expect(state.transcription).toContain(payload);
     });
   });
+  describe("When lightMode receives a state", () => {
+    test("Then isLight should be toggled", () => {
+      state = stateMock;
+      stateMock.isLight = false;
+
+      mutations.lightMode(state);
+
+      expect(state.isLight).toBeTruthy();
+    });
+  });
 });
