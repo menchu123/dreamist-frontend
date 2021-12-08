@@ -379,14 +379,15 @@ export default defineComponent({
   height: 50px;
 }
 .form-content {
+  height: calc(100vh - 104px);
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   @media only screen and (min-width: 768px) {
     height: calc(100vh - 145px);
-    overflow: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
   }
 }
 .delete-button {
@@ -446,10 +447,13 @@ export default defineComponent({
   max-width: $content-width;
   min-width: 280px;
   margin: 0 auto;
+  overflow: scroll;
   @media only screen and (min-width: 768px) {
     max-width: $content-width + 100px;
     margin-top: 104px;
-    height: 100%;
+    min-height: auto;
+    height: calc(100% - 104px);
+    box-sizing: content-box;
   }
   &__top-nav {
     display: flex;
