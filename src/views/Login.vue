@@ -110,7 +110,7 @@ export default defineComponent({
   }
 
   &.light {
-    @include backgroundLight;
+    @include backgroundLight-full;
     color: $font-color-light;
     & h2 {
       color: white;
