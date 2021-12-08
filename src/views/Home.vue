@@ -164,7 +164,7 @@ export default defineComponent({
   }
 }
 .home.light {
-  @include backgroundLight;
+  background: transparent;
   .title {
     color: $lightgrey-light;
   }

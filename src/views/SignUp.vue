@@ -111,7 +111,7 @@ export default defineComponent({
     @include bottomLink;
   }
   &.light {
-    @include backgroundLight;
+    @include backgroundLight-full;
     color: $font-color-light;
     & h2 {
       color: white;

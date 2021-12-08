@@ -174,9 +174,6 @@ export default defineComponent({
   .dream-recording__message {
     color: $lightgrey-light;
   }
-  .dream-recording__message {
-    color: $lightgrey-light;
-  }
   .pulsing-mic {
     background-color: $accent1-light;
   }
