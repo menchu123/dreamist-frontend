@@ -17,7 +17,7 @@
     <section v-if="noDreams() && !isLoading" class="no-dreams">
       <h2>
         You have not yet logged any dreams<span class="no-dreams--small"
-          >When you are ready, tap below to record your first dream</span
+          >When you are ready, tap on + to record your first dream</span
         >
       </h2>
     </section>
@@ -169,6 +169,9 @@ export default defineComponent({
     color: $lightgrey-light;
   }
   .sign-out {
+    color: $lightgrey-light;
+  }
+  .no-dreams h2 {
     color: $lightgrey-light;
   }
 }
