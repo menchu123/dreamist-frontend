@@ -205,6 +205,9 @@
 .moonrise-enter-active {
   animation: move-in 1.2s;
 }
+.moonrise-leave-active {
+  animation: move-out 0.8s;
+}
 
 @keyframes move-in {
   0% {
@@ -215,5 +218,17 @@
   100% {
     top: 50px;
     opacity: 1;
+  }
+}
+
+@keyframes move-out {
+  0% {
+    top: 50px;
+    opacity: 1;
+  }
+  100% {
+    top: 150px;
+    left: calc(50% - ((($content-width) + 160px) / 2));
+    opacity: 0;
   }
 }

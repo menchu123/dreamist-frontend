@@ -7,7 +7,7 @@
         v-if="enter"
         :src="require(`@/assets/${myImageSource}.png`)"
         alt="moon"
-        key="moon-sun"
+        :key="myImageSource"
         class="moon-image"
       />
     </transition>
