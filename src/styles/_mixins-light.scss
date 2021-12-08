@@ -1,7 +1,36 @@
 @import "./variables-light";
 
 @mixin backgroundLight {
-  background: linear-gradient(180deg, #9fc5ee 0%, #f8c6c5 100%);
+  background: url("../assets/BackgroundLight.svg"),
+    linear-gradient(180deg, #9fc5ee 0%, #f8c6c5 100%);
+  min-height: 100vh;
+  width: 100%;
+  background-position-y: top;
+  background-repeat: repeat-x;
+  background-size: contain;
+  background-attachment: fixed;
+  @media only screen and (min-width: 768px) {
+    background: url("../assets/BackgroundLightBig.svg"),
+      linear-gradient(180deg, #9fc5ee 0%, #f8c6c5 100%);
+    background-size: auto;
+    background-repeat: no-repeat;
+  }
+}
+@mixin backgroundLight-full {
+  background: url("../assets/BackgroundLight-full.svg"),
+    linear-gradient(180deg, #9fc5ee 0%, #f8c6c5 100%);
+  height: 100vh;
+  background-clip: border-box;
+  background-position-y: top;
+  background-position-x: center;
+  background-repeat: repeat-x;
+  background-size: cover;
+  background-attachment: fixed;
+  @media only screen and (min-width: 768px) {
+    background: url("../assets/BackgroundLight-fullBig.svg"),
+      linear-gradient(180deg, #9fc5ee 0%, #f8c6c5 100%);
+    background-repeat: no-repeat;
+  }
 }
 
 @mixin userForm-light {
@@ -19,6 +48,7 @@
     background-color: $lightgrey-light;
     padding: 0 20px;
     font-size: 16px;
+    color: $font-color-light;
   }
   input:focus-visible {
     outline: none;
