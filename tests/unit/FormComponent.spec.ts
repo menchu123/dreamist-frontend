@@ -85,6 +85,31 @@ describe("Given a FormComponent component", () => {
       expect(onSubmit).toHaveBeenCalled();
     });
   });
+  describe("When the form is submitted with an image", () => {
+    test("Then it should invoke onSubmit", () => {
+      const store = createStore({
+        state() {
+          return state;
+        },
+        actions: { addDream: jest.fn(), checkToken: jest.fn() },
+      });
+
+      const wrapper = mount(FormComponent, {
+        global: {
+          plugins: [router, store],
+        },
+        stubs: ["router-link", "router-view"],
+      });
+
+      const onSubmit = jest.fn();
+      onSubmit();
+      const imageInput = wrapper.get("input[id='file']");
+      imageInput.setValue("");
+      const form = wrapper.get("form");
+      form.trigger("submit");
+      expect(onSubmit).toHaveBeenCalled();
+    });
+  });
   describe("When the description is entered", () => {
     test("Then it should adjust its size", async () => {
       const store = createStore({
