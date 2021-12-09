@@ -146,7 +146,7 @@ export default defineComponent({
     display: flex;
     justify-content: flex-end;
     h2 {
-      width: $content-width;
+      max-width: $content-width;
     }
     &--small {
       display: block;
