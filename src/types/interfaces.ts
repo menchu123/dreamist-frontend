@@ -13,6 +13,9 @@ interface SpeechRecognitionAlternative {
 
 interface SpeechRecognitionResult {
   0: SpeechRecognitionAlternative;
+  1?: SpeechRecognitionAlternative;
+  2?: SpeechRecognitionAlternative;
+  3?: SpeechRecognitionAlternative;
   isFinal: boolean;
   length: number;
 }
