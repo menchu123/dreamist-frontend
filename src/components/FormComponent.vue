@@ -51,7 +51,6 @@
           id="title"
           placeholder="Write your title here..."
           v-model="title"
-          @input="adjustSize($event.target)"
           maxlength="25"
         />
       </section>

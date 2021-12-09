@@ -11,9 +11,6 @@
       talking.
     </h3>
     <div class="speech-transciption">
-      <div v-for="(word, index) in transcription" :key="index">
-        {{ word }}
-      </div>
       <div>{{ runtimeTranscription }}</div>
     </div>
   </section>
@@ -25,12 +22,18 @@ import { defineComponent } from "vue";
 import { mapActions, mapState } from "vuex";
 import { SpeechRecognitionResult } from "@/types/interfaces";
 
+declare global {
+  interface Window {
+    SpeechRecognition: any;
+    webkitSpeechRecognition?: any;
+  }
+}
+
 export default defineComponent({
   name: "DreamRecording",
   data() {
     return {
       runtimeTranscription: "",
-      transcription: [""],
       lang: "es-ES",
     };
   },
@@ -40,9 +43,8 @@ export default defineComponent({
   methods: {
     ...mapActions(["stopRecording", "fillInTranscription"]),
     startTxtToSpeech() {
-      (<any>window).SpeechRecognition =
-        (<any>window).SpeechRecognition || (<any>window).webkitSpeechRecognition;
-      const recognition = new (<any>window).SpeechRecognition();
+      window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new window.SpeechRecognition();
       recognition.lang = this.lang;
       recognition.interimResults = true;
 
@@ -57,9 +59,7 @@ export default defineComponent({
         }
       });
 
-      // end of transcription
       recognition.addEventListener("end", () => {
-        this.transcription.push(this.runtimeTranscription);
         this.fillInTranscription(this.runtimeTranscription);
         this.runtimeTranscription = "";
         recognition.stop();
