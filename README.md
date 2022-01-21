@@ -14,7 +14,7 @@ Dreamist is a digital dream journal that allows users to log their dreams. You c
 
 [Link to deployment](https://dreamist.netlify.app/)
 
-<img src="https://i.ibb.co/4NpB7sd/demo.gif" alt="Dreamist" height="500" />
+![Alt Text](https://i.ibb.co/DMQ52hq/Demo.gif)
 
 ## Project setup
 
